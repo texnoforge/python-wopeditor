@@ -1,0 +1,23 @@
+#:kivy 2.0
+
+AbcScreen:
+    name: "abc"
+
+    GridLayout:
+        cols: 1
+        padding: [10, 0]
+
+        Header:
+            id: header
+            on_press_back: app.goto_abcs(back_from=root.name)
+
+        StackLayout:
+            id: symbols_list
+            spacing: 5
+
+
+<SymbolButton>:
+    size: [max(self.texture_size[0] +40, 100), self.texture_size[1] + 40]
+    font_size: 24
+    size_hint: None, None
+    on_release: app.goto_symbol(self.symbol)

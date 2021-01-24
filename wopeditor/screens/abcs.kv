@@ -1,0 +1,22 @@
+#:kivy 2.0
+
+AbcsScreen:
+    name: "abcs"
+
+    GridLayout:
+        cols: 1
+        padding: [10, 0]
+
+        Header:
+            title: "alphabets"
+
+        StackLayout:
+            id: abcs_list
+            spacing: 5
+
+
+<AbcButton>:
+    size: [max(self.texture_size[0] + 80, 100), self.texture_size[1] + 80]
+    font_size: 36
+    size_hint: None, None
+    on_release: app.goto_abc(self.abc)

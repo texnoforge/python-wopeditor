@@ -1,0 +1,23 @@
+#:kivy 2.0
+
+
+SymbolScreen:
+    name: "symbol"
+
+    GridLayout:
+        cols: 1
+        padding: [10, 0]
+
+        Header:
+            id: header
+            on_press_back: app.goto_abc(back_from=root.name)
+
+        StackLayout:
+            id: drawings_list
+            spacing: 5
+
+
+<DrawingButton>:
+    size: [max(self.texture_size[0] * 1.2, 100), self.texture_size[1] * 4]
+    size_hint: None, None
+    on_release: app.goto_drawing(self.drawing)
