@@ -9,14 +9,14 @@ from kivy.properties import BooleanProperty, ListProperty
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 
-from screens.abcs import AbcsScreen
-from screens.abc import AbcScreen
-from screens.symbol import SymbolScreen
-from screens.drawing import DrawingScreen
+from wopeditor.screens.abcs import AbcsScreen
+from wopeditor.screens.abc import AbcScreen
+from wopeditor.screens.symbol import SymbolScreen
+from wopeditor.screens.drawing import DrawingScreen
 
-from widgets.header import Header
+from wopeditor.widgets.header import Header
 
-import texnomagic.abcs
+from wopeditor.texnomagic.abcs import get_alphabets
 
 
 class WoPEditorApp(App):
@@ -55,7 +55,7 @@ class WoPEditorApp(App):
 
     def load_abcs(self):
         abcs_path = self.base_path.parent / 'data' / 'alphabets'
-        self.abcs = texnomagic.abcs.get_alphabets(abcs_path)
+        self.abcs = get_alphabets(abcs_path)
 
     def goto_abcs(self, back_from=None):
         screen = self.get_screen('abcs')

@@ -1,4 +1,4 @@
-from texnomagic.drawing import TexnoMagicDrawing
+from wopeditor.texnomagic.drawing import TexnoMagicDrawing
 
 
 class TexnoMagicSymbol:

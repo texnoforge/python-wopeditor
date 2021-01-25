@@ -2,7 +2,7 @@
 import glob
 from pathlib import Path
 
-from texnomagic.abc import TexnoMagicAlphabet
+from wopeditor.texnomagic.abc import TexnoMagicAlphabet
 
 
 def get_alphabets(base_path):

@@ -35,13 +35,39 @@ language based on symbols. You can read my posts about
 to get better idea of what I'm trying to achieve.
 
 
+## Requirements
+
+You should be ablo to run `wopeditor` on many different systems supported by
+Kivy framework including Linux, Windows, Mac, and Android.
+
+You need to install following requirements:
+
+* [Python 3](https://www.python.org/downloads/) - developed and tested with
+  **Python 3.9** (lower versions might or might not work)
+
+* [Kivy](https://kivy.org/doc/stable/gettingstarted/installation.html)
+  UI framework - you **need version 2.0.0 or newer**
+
+
 ## Usage
 
-Get `python` 3 and `kivy >= 2.0.0` and then run
+After you installed requirements above, run
+
+
+### on any system
 
 ```
-python wopeditor/wopeditor.py
+python wopeditor.py
 ```
 
-You can also use `wopeditor.sh` (linux) or `wopeditor.bat` (windows) script
-in the project root.
+### on linux/unix
+
+```
+./wopeditor.py
+```
+
+### on windows
+
+```
+wopeditor.bat
+```

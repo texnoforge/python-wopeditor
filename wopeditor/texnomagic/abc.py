@@ -1,4 +1,4 @@
-from texnomagic.symbol import TexnoMagicSymbol
+from wopeditor.texnomagic.symbol import TexnoMagicSymbol
 
 
 class TexnoMagicAlphabet:

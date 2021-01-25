@@ -6,7 +6,7 @@
         {
             "label": "python",
             "type": "shell",
-            "command": "python wopeditor/wopeditor.py",
+            "command": "python wopeditor.py",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

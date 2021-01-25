@@ -9,8 +9,8 @@
             "name": "wopeditor.py",
             "type": "python",
             "request": "launch",
-            "program": "wopeditor/wopeditor.py",
+            "program": "wopeditor.py",
             "console": "integratedTerminal"
         }
-    ]
+    ],
 }

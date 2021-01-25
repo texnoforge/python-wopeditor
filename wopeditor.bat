@@ -1,1 +1,1 @@
-python wopeditor/wopeditor.py
+python wopeditor.py
