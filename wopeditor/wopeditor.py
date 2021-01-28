@@ -31,6 +31,9 @@ class WoPEditorApp(App):
         self.base_path = Path(os.path.dirname(__file__)).resolve()
         self.load_abcs()
         self.goto_abcs()
+        self.goto_abc(self.abcs[0])
+        self.goto_symbol(self.abc.symbols[0])
+        #self.goto_drawing(self.symbol.drawings[0])
 
     def get_screen(self, screen_name):
         screen = self.screens.get(screen_name)
@@ -66,18 +69,21 @@ class WoPEditorApp(App):
     def goto_abc(self, abc=None, back_from=None):
         screen = self.get_screen('abc')
         if abc:
+            self.abc = abc
             screen.update_abc(abc)
         self.goto_screen(screen, back=back_from)
 
     def goto_symbol(self, symbol=None, back_from=None):
         screen = self.get_screen('symbol')
         if symbol:
+            self.symbol = symbol
             screen.update_symbol(symbol)
         self.goto_screen(screen, back=back_from)
 
     def goto_drawing(self, drawing):
         screen = self.get_screen('drawing')
-        screen.update_symbol(drawing)
+        self.drawing = drawing
+        screen.update_drawing(drawing)
         self.goto_screen(screen)
 
 

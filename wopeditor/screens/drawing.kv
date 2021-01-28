@@ -10,8 +10,7 @@ DrawingScreen:
 
         Header:
             id: header
-            on_press_back: app.goto_abc(back_from=root.name)
+            on_press_back: app.goto_symbol(back_from=root.name)
 
-        Label:
+        DrawingPreview:
             id: drawing_preview
-            text: "drawing preview"

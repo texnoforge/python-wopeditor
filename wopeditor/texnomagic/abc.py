@@ -14,11 +14,11 @@ class TexnoMagicAlphabet:
         return self
 
     def load_symbols(self):
-        self._symbols = {}
+        self._symbols = []
         for symbol_info_path in self.base_path.glob('symbols/*/texno_symbol.json'):
             symbol = TexnoMagicSymbol()
             symbol.load(symbol_info_path.parent)
-            self._symbols[symbol.name] = symbol
+            self._symbols.append(symbol)
 
     @property
     def symbols(self):

@@ -12,12 +12,19 @@ SymbolScreen:
             id: header
             on_press_back: app.goto_abc(back_from=root.name)
 
-        StackLayout:
-            id: drawings_list
-            spacing: 5
+        ScrollView:
+            id: main_scroll
+            do_scroll_x: False
+            do_scroll_y: True
+            bar_pos_y: "right"
+            StackLayout:
+                id: drawings_list
+                size_hint: 1, None
+                height: max(main_scroll.height, self.minimum_height)
+                spacing: 10
 
 
 <DrawingButton>:
-    size: [max(self.texture_size[0] * 1.2, 100), self.texture_size[1] * 4]
+    size: [160, 160]
     size_hint: None, None
     on_release: app.goto_drawing(self.drawing)

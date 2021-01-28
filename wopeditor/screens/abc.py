@@ -13,7 +13,7 @@ class AbcScreen(Screen):
             self.abc = abc
         symbols_list = self.ids['symbols_list']
         symbols_list.clear_widgets()
-        for symbol in self.abc.symbols.values():
+        for symbol in self.abc.symbols:
             b = SymbolButton(symbol=symbol)
             symbols_list.add_widget(b)
         self.ids['header'].title = self.abc.name
