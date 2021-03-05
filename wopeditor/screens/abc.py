@@ -1,22 +1,20 @@
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen
+from kivy.uix.behaviors.focus import FocusBehavior
+from kivy.uix.behaviors.focus import FocusBehavior
+from kivy.uix.popup import Popup
+
+from wopeditor.texnomagic.symbol import TexnoMagicSymbol
+from wopeditor.texnomagic import common 
 
 
-class AbcScreen(Screen):
-    abc = None
-    symbols = []
-
-    def update_abc(self, abc=None):
-        if abc:
-            if abc == self.abc:
-                return
-            self.abc = abc
-        symbols_list = self.ids['symbols_list']
-        symbols_list.clear_widgets()
-        for symbol in self.abc.symbols:
-            b = SymbolButton(symbol=symbol)
-            symbols_list.add_widget(b)
-        self.ids['header'].title = self.abc.name
+class FocusButton(FocusBehavior, Button):
+    def keyboard_on_key_up(self, window, keycode):
+        super().keyboard_on_key_up(window, keycode)
+        if keycode[1] in ['enter', 'numpadenter']:
+            self.dispatch("on_release")
+            return True
+        return False
 
 
 class SymbolButton(Button):
@@ -25,3 +23,52 @@ class SymbolButton(Button):
         if self.symbol:
             kwargs['text'] = self.symbol.name
         super().__init__(**kwargs)
+
+
+class NewSymbolPopup(Popup):
+    def __init__(self, **kwargs):
+        self.register_event_type('on_confirm')
+        super().__init__(**kwargs)
+        self.symbol = None
+
+    def on_confirm(self):
+        pass
+
+    def confirm(self):
+        missing = []
+        name = self.ids['name_input'].text
+        meaning = self.ids['meaning_input'].text
+        if not name:
+            missing.append('name')
+        if not meaning:
+            missing.append('meaning')
+        if missing:
+            msg = "missing required input: %s" % ", ".join(missing)
+            self.ids['warning_label'].text = msg
+        else:
+            self.symbol = TexnoMagicSymbol(name=name, meaning=meaning)
+            self.dispatch('on_confirm')
+            self.dismiss()
+
+
+class AbcScreen(Screen):
+    abc = None
+    symbols = []
+
+    def update_abc(self, abc=None):
+        if abc:
+            self.abc = abc
+        if not self.abc:
+            return
+        symbols_list = self.ids['symbols_list']
+        symbols_list.clear_widgets()
+        for symbol in self.abc.symbols:
+            b = SymbolButton(symbol=symbol)
+            symbols_list.add_widget(b)
+        self.ids['header'].title = self.abc.name
+
+    def show_create_new_symbol(self):
+        NewSymbolPopup().open()
+
+    def open_dir(self):
+        common.open_dir(self.abc.info_path)

@@ -2,11 +2,13 @@ import os
 from pathlib import Path
 
 from kivy.app import App
+from kivy.factory import Factory
 from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.properties import NumericProperty, StringProperty
 from kivy.properties import BooleanProperty, ListProperty
 from kivy.uix.button import Button
+from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 from wopeditor.screens.abcs import AbcsScreen
@@ -31,8 +33,9 @@ class WoPEditorApp(App):
         self.base_path = Path(os.path.dirname(__file__)).resolve()
         self.load_abcs()
         self.goto_abcs()
-        self.goto_abc(self.abcs[0])
-        self.goto_symbol(self.abc.symbols[0])
+        # DEBUG
+        #self.goto_abc(self.abcs[0])
+        #self.goto_symbol(self.abc.symbols[0])
         #self.goto_drawing(self.symbol.drawings[0])
 
     def get_screen(self, screen_name):
@@ -46,6 +49,7 @@ class WoPEditorApp(App):
             direction = 'right'
         else:
             direction = 'left'
+
         return self.root.switch_to(screen, direction=direction)
 
     def load_screen(self, screen_name):
@@ -85,6 +89,14 @@ class WoPEditorApp(App):
         self.drawing = drawing
         screen.update_drawing(drawing)
         self.goto_screen(screen)
+
+    def new_symbol(self, abc):
+        popup = Factory.NewSymbolPopup()
+
+    def add_new_symbol(self, symbol):
+        self.abc.save_new_symbol(symbol)
+        Logger.info("symbol: saved new symbol: %s", symbol)
+        self.get_screen('abc').update_abc()
 
 
 if __name__ == "__main__":
