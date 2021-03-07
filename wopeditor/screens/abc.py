@@ -9,6 +9,29 @@ from wopeditor.widgets.focusbutton import FocusButton
 from wopeditor.widgets.sidebar import Sidebar, SideButton
 
 
+class AbcScreen(Screen):
+    abc = None
+    symbols = []
+
+    def update_abc(self, abc=None):
+        if abc:
+            self.abc = abc
+        if not self.abc:
+            return
+        symbols_list = self.ids['symbols_list']
+        symbols_list.clear_widgets()
+        for symbol in self.abc.symbols:
+            b = SymbolButton(symbol=symbol)
+            symbols_list.add_widget(b)
+        self.ids['header'].title = self.abc.name
+
+    def show_create_new_symbol(self):
+        NewSymbolPopup().open()
+
+    def open_dir(self):
+        common.open_dir(self.abc.info_path, select=True)
+
+
 class SymbolButton(Button):
     def __init__(self, **kwargs):
         self.symbol = kwargs.pop('symbol', None)
@@ -41,26 +64,3 @@ class NewSymbolPopup(Popup):
             self.symbol = TexnoMagicSymbol(name=name, meaning=meaning)
             self.dispatch('on_confirm')
             self.dismiss()
-
-
-class AbcScreen(Screen):
-    abc = None
-    symbols = []
-
-    def update_abc(self, abc=None):
-        if abc:
-            self.abc = abc
-        if not self.abc:
-            return
-        symbols_list = self.ids['symbols_list']
-        symbols_list.clear_widgets()
-        for symbol in self.abc.symbols:
-            b = SymbolButton(symbol=symbol)
-            symbols_list.add_widget(b)
-        self.ids['header'].title = self.abc.name
-
-    def show_create_new_symbol(self):
-        NewSymbolPopup().open()
-
-    def open_dir(self):
-        common.open_dir(self.abc.info_path)

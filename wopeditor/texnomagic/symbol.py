@@ -1,7 +1,7 @@
 import json
+import os
 
 from wopeditor.texnomagic.drawing import TexnoMagicDrawing
-import os
 
 
 class TexnoMagicSymbol:
@@ -19,7 +19,7 @@ class TexnoMagicSymbol:
         if base_path:
             self.base_path = base_path
         
-        assert base_path
+        assert self.base_path
         info = json.load(self.info_path.open())
 
         name = info.get('name')

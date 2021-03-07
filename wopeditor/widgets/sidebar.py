@@ -13,7 +13,7 @@ Builder.load_string('''
 
 <SideButton>:
     size_hint: None, None
-    height: 40
+    size: [self.texture_size[0] + dp(40), dp(40)]
 ''')
 
 

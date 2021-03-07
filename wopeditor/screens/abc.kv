@@ -2,6 +2,34 @@
 #:import Factory kivy.factory.Factory
 
 
+AbcScreen:
+    name: "abc"
+
+    GridLayout:
+        cols: 1
+        padding: [10, 0]
+
+        Header:
+            id: header
+            on_press_back: app.goto_abcs(back_from=root.name)
+
+        BoxLayout:
+            Sidebar:
+                id: sidebar
+                SideButton:
+                    text: "new symbol"
+                    on_release: root.show_create_new_symbol()
+                SideButton:
+                    text: "open dir"
+                    on_release: root.open_dir()
+                FloatLayout:
+                    #Filler
+
+            StackLayout:
+                id: symbols_list
+                spacing: 5
+
+
 <SymbolButton>:
     size: [max(self.texture_size[0] +40, 100), self.texture_size[1] + 40]
     font_size: 24
@@ -43,31 +71,3 @@
             font_size: '20sp'
             height: self.texture_size[1] * 2.2
             on_release: root.confirm()
-
-
-AbcScreen:
-    name: "abc"
-
-    GridLayout:
-        cols: 1
-        padding: [10, 0]
-
-        Header:
-            id: header
-            on_press_back: app.goto_abcs(back_from=root.name)
-
-        BoxLayout:
-            Sidebar:
-                id: sidebar
-                SideButton:
-                    text: "new symbol"
-                    on_release: root.show_create_new_symbol()
-                SideButton:
-                    text: "open dir"
-                    on_release: root.open_dir()
-                FloatLayout:
-                    #Filler
-
-            StackLayout:
-                id: symbols_list
-                spacing: 5

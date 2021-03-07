@@ -1,11 +1,15 @@
+import json
+import os
+
 from wopeditor.texnomagic.symbol import TexnoMagicSymbol
 from wopeditor.texnomagic import common 
 
 
 class TexnoMagicAlphabet:
-    name = None
-    base_path = None
-    _symbols = None
+    def __init__(self, name=None, base_path=None):
+        self.name = name
+        self.base_path = base_path
+        self._symbols = None
 
     @property
     def info_path(self):
@@ -19,7 +23,14 @@ class TexnoMagicAlphabet:
         if base_path:
             self.base_path = base_path
 
-        self.name = self.base_path.name
+        assert self.base_path
+        info = json.load(self.info_path.open())
+
+        name = info.get('name')
+        if not name:
+            name = self.base_path.name
+        self.name = name
+
         return self
 
     def load_symbols(self):
@@ -28,6 +39,13 @@ class TexnoMagicAlphabet:
             symbol = TexnoMagicSymbol()
             symbol.load(symbol_info_path.parent)
             self._symbols.append(symbol)
+
+    def save(self):
+        os.makedirs(self.base_path, exist_ok=True)
+        info = {
+            'name': self.name,
+        }
+        return json.dump(info, self.info_path.open('w'))
 
     def save_new_symbol(self, symbol):
         assert symbol.name

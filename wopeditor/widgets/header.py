@@ -7,11 +7,12 @@ from kivy.clock import Clock
 Builder.load_string('''
 <Header>:
     size_hint: 1, None
+    height: dp(80)
 
     AnchorLayout:
         id: hdr_layout
         anchor_x: 'center'
-        anchor_y: 'center'
+        anchor_y: 'top'
 
         Label:
             id: hdr_label
@@ -26,9 +27,9 @@ Builder.load_string('''
         AnchorLayout:
             size: [hdr_layout.size[0], hdr_label.size[1]]
             size_hint: None, None
-            pos: [self.parent.pos[0], hdr_label.pos[1]]
+            pos: [self.parent.pos[0], hdr_label.pos[1] - 10]
             anchor_x: 'left'
-            anchor_y: 'center'
+            anchor_y: 'top'
 
             Button:
                 id: back

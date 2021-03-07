@@ -18,7 +18,8 @@ from wopeditor.screens.drawing import DrawingScreen
 
 from wopeditor.widgets.header import Header
 
-from wopeditor.texnomagic.abcs import get_alphabets
+from wopeditor.texnomagic.abcs import TexnoMagicAlphabets
+from wopeditor.texnomagic import common
 
 
 class WoPEditorApp(App):
@@ -37,6 +38,14 @@ class WoPEditorApp(App):
         #self.goto_abc(self.abcs[0])
         #self.goto_symbol(self.abc.symbols[0])
         #self.goto_drawing(self.symbol.drawings[0])
+
+    @property
+    def core_abcs_path(self):
+        return self.base_path / 'data' / 'alphabets'
+
+    @property
+    def user_abcs_path(self):
+        return common.get_appdata_path() / 'alphabets'
 
     def get_screen(self, screen_name):
         screen = self.screens.get(screen_name)
@@ -61,8 +70,13 @@ class WoPEditorApp(App):
         return screen
 
     def load_abcs(self):
-        abcs_path = self.base_path.parent / 'data' / 'alphabets'
-        self.abcs = get_alphabets(abcs_path)
+        paths = {
+            'core': self.core_abcs_path,
+            'user': self.user_abcs_path,
+            'community': Path("c:/invalid/path"),
+        }
+        self.abcs = TexnoMagicAlphabets(paths)
+        self.abcs.load()
 
     def goto_abcs(self, back_from=None):
         screen = self.get_screen('abcs')
@@ -90,13 +104,21 @@ class WoPEditorApp(App):
         screen.update_drawing(drawing)
         self.goto_screen(screen)
 
-    def new_symbol(self, abc):
+    def new_symbol(self):
         popup = Factory.NewSymbolPopup()
+
+    def new_abc(self):
+        popup = Factory.NewAbcPopup()
 
     def add_new_symbol(self, symbol):
         self.abc.save_new_symbol(symbol)
         Logger.info("symbol: saved new symbol: %s", symbol)
         self.get_screen('abc').update_abc()
+
+    def add_new_abc(self, abc):
+        self.abcs.save_new_alphabet(abc)
+        Logger.info("abc: saved new alphabet: %s", abc)
+        self.get_screen('abcs').update_abcs()
 
 
 if __name__ == "__main__":
