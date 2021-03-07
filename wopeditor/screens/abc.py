@@ -1,20 +1,12 @@
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen
-from kivy.uix.behaviors.focus import FocusBehavior
-from kivy.uix.behaviors.focus import FocusBehavior
 from kivy.uix.popup import Popup
 
 from wopeditor.texnomagic.symbol import TexnoMagicSymbol
 from wopeditor.texnomagic import common 
-
-
-class FocusButton(FocusBehavior, Button):
-    def keyboard_on_key_up(self, window, keycode):
-        super().keyboard_on_key_up(window, keycode)
-        if keycode[1] in ['enter', 'numpadenter']:
-            self.dispatch("on_release")
-            return True
-        return False
+from wopeditor.widgets.labeledtextinput import LabeledTextInput
+from wopeditor.widgets.focusbutton import FocusButton
+from wopeditor.widgets.sidebar import Sidebar, SideButton
 
 
 class SymbolButton(Button):

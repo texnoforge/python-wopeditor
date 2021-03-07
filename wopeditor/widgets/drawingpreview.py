@@ -12,8 +12,6 @@ Builder.load_string('''
 ''')
 
 
-
-
 class DrawingPreview(Widget):
     drawing = None
 

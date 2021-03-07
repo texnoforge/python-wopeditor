@@ -2,39 +2,11 @@
 #:import Factory kivy.factory.Factory
 
 
-<FocusButton>:
-    bold: self.focus
-
-
 <SymbolButton>:
     size: [max(self.texture_size[0] +40, 100), self.texture_size[1] + 40]
     font_size: 24
     size_hint: None, None
     on_release: app.goto_symbol(self.symbol)
-
-
-<LabeledTextInput@BoxLayout>:
-    label_text: 'label'
-    text: text_input.text
-    spacing: 10
-    size_hint: 1, None
-    height: text_input.height
-
-    Label:
-        size_hint_x: 0.5
-        text: root.label_text
-        text_size: self.size
-        halign: 'right'
-        valign: 'center'
-
-    AnchorLayout:
-        anchor_y: 'center'
-        TextInput:
-            id: text_input
-            size_hint: 1, None
-            height: self.font_size * 2
-            multiline: False
-            write_tab: False
 
 
 <NewSymbolPopup>:
@@ -84,25 +56,18 @@ AbcScreen:
             id: header
             on_press_back: app.goto_abcs(back_from=root.name)
 
-        GridLayout:
-            rows: 1
-            GridLayout:
+        BoxLayout:
+            Sidebar:
                 id: sidebar
-                cols: 1
-                padding: 0, 0, 30, 0
-                size_hint_x: None
-                width: 200
-                spacing: 5
-                Button:
+                SideButton:
                     text: "new symbol"
-                    size_hint: None, None
-                    height: 40
                     on_release: root.show_create_new_symbol()
-                Button:
+                SideButton:
                     text: "open dir"
-                    size_hint: None, None
-                    height: 40
                     on_release: root.open_dir()
+                FloatLayout:
+                    #Filler
+
             StackLayout:
                 id: symbols_list
                 spacing: 5
