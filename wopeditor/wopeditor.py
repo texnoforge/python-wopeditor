@@ -15,6 +15,7 @@ from wopeditor.screens.abcs import AbcsScreen
 from wopeditor.screens.abc import AbcScreen
 from wopeditor.screens.symbol import SymbolScreen
 from wopeditor.screens.drawing import DrawingScreen
+from wopeditor.screens.newdrawing import NewDrawingScreen
 
 from wopeditor.widgets.header import Header
 
@@ -35,8 +36,8 @@ class WoPEditorApp(App):
         self.load_abcs()
         self.goto_abcs()
         # DEBUG
-        #self.goto_abc(self.abcs[0])
-        #self.goto_symbol(self.abc.symbols[0])
+        self.goto_abc(self.abcs.abcs['user'][0])
+        self.goto_symbol(self.abc.symbols[0])
         #self.goto_drawing(self.symbol.drawings[0])
 
     @property
@@ -102,6 +103,11 @@ class WoPEditorApp(App):
         screen = self.get_screen('drawing')
         self.drawing = drawing
         screen.update_drawing(drawing)
+        self.goto_screen(screen)
+
+    def goto_new_drawing(self):
+        screen = self.get_screen('newdrawing')
+        screen.update()
         self.goto_screen(screen)
 
     def new_symbol(self):

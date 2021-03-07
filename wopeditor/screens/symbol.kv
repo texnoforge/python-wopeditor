@@ -12,16 +12,25 @@ SymbolScreen:
             id: header
             on_press_back: app.goto_abc(back_from=root.name)
 
-        ScrollView:
-            id: main_scroll
-            do_scroll_x: False
-            do_scroll_y: True
-            bar_pos_y: "right"
-            StackLayout:
-                id: drawings_list
-                size_hint: 1, None
-                height: max(main_scroll.height, self.minimum_height)
-                spacing: 10
+        BoxLayout:
+            Sidebar:
+                id: sidebar
+                SideButton:
+                    text: "new drawing"
+                    on_release: app.goto_new_drawing()
+                SideButton:
+                    text: "open dir"
+                    on_release: root.open_dir()
+                FloatLayout:
+                    #Filler
+
+            NiceScrollView:
+                id: main_scroll
+                StackLayout:
+                    id: drawings_list
+                    size_hint: 1, None
+                    height: max(main_scroll.height, self.minimum_height)
+                    spacing: 10
 
 
 <DrawingButton>:
