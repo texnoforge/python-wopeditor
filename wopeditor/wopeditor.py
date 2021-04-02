@@ -1,5 +1,5 @@
 from configparser import InterpolationSyntaxError
-import os
+import sys, os
 from pathlib import Path
 
 from kivy.app import App
@@ -26,6 +26,13 @@ from wopeditor.texnomagic.drawing import TexnoMagicDrawing
 from wopeditor.texnomagic import common
 
 
+if getattr(sys, 'frozen', False):
+    # PyInstaller
+    APP_PATH = sys._MEIPASS
+else:
+    APP_PATH = os.path.dirname(os.path.abspath(__file__))
+
+
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
 
@@ -38,10 +45,11 @@ class WoPEditorApp(App):
         self.title = 'Words of Power Editor'
         self.screens = {}
         self.screens_available = ['abcs']
-        self.base_path = Path(os.path.dirname(__file__)).resolve()
+        self.base_path = Path(APP_PATH)
         return ScreenManager()
 
     def on_start(self):
+        Logger.info("WoPeditor: base path: %s" % self.base_path)
         self.load_abcs()
         self.goto_abcs()
         # DEBUG
@@ -73,7 +81,7 @@ class WoPEditorApp(App):
 
     def load_screen(self, screen_name):
         fn = self.base_path.joinpath('screens/%s.kv' % screen_name)
-        Logger.warning("WoPEditor: loading screen: %s" % fn)
+        Logger.info("WoPEditor: loading screen data: %s" % fn)
         screen = Builder.load_file(str(fn))
         assert screen
         self.screens[screen_name] = screen
