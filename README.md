@@ -14,15 +14,16 @@ collecting enough drawings of a symbol, a model can be trained and used to
 recognize the symbol from user input.
 
 Entire alphabets of symbols with names, meanings, and graphical
-representations be created including models to recognize individual symbols
-drawn by users in real-time.
+representations can be created including models to recognize individual
+symbols drawn by users in real-time.
 
 
 ## Status
 
-### development just started, come back later
+### early development, not useful yet ¯\\\_(ツ)\_/¯
 
-There is only a bare skeleton of UI in Kivy at the moment ¯\\\_(ツ)\_/¯
+I'm working on UI and core code, more features are required in order for this
+to be worth playing with. Getting there, stay tuned ⊂(✰‿✰)つ
 
 
 ## TexnoMagic
@@ -45,7 +46,7 @@ is an attempt at serious implementation which can be reused in other software
 and/or used as a reference.
 
 
-## Requirements
+## Requirements Installation
 
 You should be ablo to run `wopeditor` on many different systems supported by
 Kivy framework including Linux, Windows, Mac, and Android.
@@ -58,10 +59,16 @@ You need to install following requirements:
 * [Kivy](https://kivy.org/doc/stable/gettingstarted/installation.html)
   UI framework - you **need version 2.0.0 or newer**
 
+**tl;dr** install Python 3 which includes `pip` and then:
+
+```
+pip install kivy
+```
+
 
 ## Usage
 
-After you installed requirements above, run
+After you've installed requirements above, run following in `wopeditor` top dir:
 
 
 ### on any system
@@ -85,6 +92,15 @@ wopeditor.bat
 
 ## Current Features
 
+### UI
+
+* create new alphabets and symbols
+* draw symbols using mouse and save to files
+* browse and preview symbols loaded from disk
+* easily open relevant files in file manager
+
+### code
+
 * code is split into small files arranged in a sustainable modular structure including UI
 * clean reusable UI code for loading and displaying alphabets/symbols/drawings from disk
 * separate `wopeditor.texnomagic` module to easily interface and work with
@@ -96,8 +112,8 @@ wopeditor.bat
 
 ## Planned Features
 
-* create new alphabets and symbols
-* draw symbols using mouse and save to files
 * train models from saved symbol drawings
 * recognize symbols from drawings using models
-* much more
+* export alphabets/symbols as mods
+* online mod browser integration
+* **more**
