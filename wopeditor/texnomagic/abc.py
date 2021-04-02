@@ -1,8 +1,8 @@
 import json
 import os
 
-from wopeditor.texnomagic.symbol import TexnoMagicSymbol
 from wopeditor.texnomagic import common 
+from wopeditor.texnomagic.symbol import TexnoMagicSymbol
 
 
 class TexnoMagicAlphabet:

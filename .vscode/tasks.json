@@ -8,6 +8,9 @@
             "type": "shell",
             "command": "python wopeditor.py",
             "problemMatcher": [],
+            "runOptions": {
+                "instanceLimit": 1,
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true

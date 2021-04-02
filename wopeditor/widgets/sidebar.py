@@ -8,7 +8,7 @@ Builder.load_string('''
     orientation: 'vertical'
     padding: 0, 0, 30, 0
     size_hint_x: None
-    width: 200
+    width: dp(150)
     spacing: 5
 
 <SideButton>:

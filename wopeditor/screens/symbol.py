@@ -2,7 +2,7 @@ from kivy.graphics import Color, Line
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen
 
-from wopeditor.texnomagic import common 
+from wopeditor.texnomagic import common
 from wopeditor.widgets.nicescrollview import NiceScrollView
 
 
@@ -12,9 +12,9 @@ class SymbolScreen(Screen):
 
     def update_symbol(self, symbol=None):
         if symbol:
-            if symbol == self.symbol:
-                return
             self.symbol = symbol
+        if not self.symbol:
+            return
         drawings_list = self.ids['drawings_list']
         drawings_list.clear_widgets()
         for drawing in self.symbol.drawings:

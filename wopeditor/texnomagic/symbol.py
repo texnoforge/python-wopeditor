@@ -1,6 +1,8 @@
 import json
 import os
+import time
 
+from wopeditor.texnomagic import common
 from wopeditor.texnomagic.drawing import TexnoMagicDrawing
 
 
@@ -14,6 +16,14 @@ class TexnoMagicSymbol:
     @property
     def info_path(self):
         return self.base_path / 'texno_symbol.json'
+
+    @property
+    def drawings_path(self):
+        return self.base_path / 'drawings'
+
+    @property
+    def model_path(self):
+        return self.base_path / 'model'
 
     def load(self, base_path=None):
         if base_path:
@@ -32,7 +42,7 @@ class TexnoMagicSymbol:
 
     def load_drawings(self):
         self._drawings = []
-        for drawing_path in self.base_path.glob('drawings/*'):
+        for drawing_path in self.drawings_path.glob('*'):
             drawing = TexnoMagicDrawing()
             drawing.load(drawing_path)
             self._drawings.append(drawing)
@@ -44,6 +54,17 @@ class TexnoMagicSymbol:
             'meaning': self.meaning,
         }
         return json.dump(info, self.info_path.open('w'))
+
+    def save_new_drawing(self, drawing):
+        assert drawing
+
+        if self._drawings is None:
+            self.load_drawings()
+
+        fn = "%s_%s.csv" % (common.name2fn(self.name), int(time.time() * 1000))
+        drawing.path = self.drawings_path / fn
+        drawing.save()
+        return self._drawings.insert(0, drawing)
 
     @property
     def drawings(self):

@@ -1,7 +1,9 @@
+from configparser import InterpolationSyntaxError
 import os
 from pathlib import Path
 
 from kivy.app import App
+from kivy.config import Config
 from kivy.factory import Factory
 from kivy.lang import Builder
 from kivy.logger import Logger
@@ -20,7 +22,11 @@ from wopeditor.screens.newdrawing import NewDrawingScreen
 from wopeditor.widgets.header import Header
 
 from wopeditor.texnomagic.abcs import TexnoMagicAlphabets
+from wopeditor.texnomagic.drawing import TexnoMagicDrawing
 from wopeditor.texnomagic import common
+
+
+Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
 
 class WoPEditorApp(App):
@@ -36,8 +42,8 @@ class WoPEditorApp(App):
         self.load_abcs()
         self.goto_abcs()
         # DEBUG
-        self.goto_abc(self.abcs.abcs['user'][0])
-        self.goto_symbol(self.abc.symbols[0])
+        #self.goto_abc(self.abcs.abcs['user'][0])
+        #self.goto_symbol(self.abc.symbols[1])
         #self.goto_drawing(self.symbol.drawings[0])
 
     @property
@@ -125,6 +131,13 @@ class WoPEditorApp(App):
         self.abcs.save_new_alphabet(abc)
         Logger.info("abc: saved new alphabet: %s", abc)
         self.get_screen('abcs').update_abcs()
+
+    def save_drawing(self):
+        screen = self.get_screen('newdrawing')
+        curves = screen.ids['drawing_area'].curves
+        drawing = TexnoMagicDrawing(curves=curves)
+        self.symbol.save_new_drawing(drawing)
+        self.goto_symbol(self.symbol, back_from='newdrawing')
 
 
 if __name__ == "__main__":
