@@ -39,6 +39,9 @@ class WoPEditorApp(App):
         self.screens = {}
         self.screens_available = ['abcs']
         self.base_path = Path(os.path.dirname(__file__)).resolve()
+        return ScreenManager()
+
+    def on_start(self):
         self.load_abcs()
         self.goto_abcs()
         # DEBUG
