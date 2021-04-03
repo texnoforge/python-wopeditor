@@ -20,10 +20,19 @@ symbols drawn by users in real-time.
 
 ## Status
 
-### early development, not useful yet ¯\\\_(ツ)\_/¯
+### early development, not very useful yet ¯\\\_(ツ)\_/¯
 
-I'm working on UI and core code, more features are required in order for this
-to be worth playing with. Getting there, stay tuned ⊂(✰‿✰)つ
+You can already use this to create and save new symbols/alphabets including
+drawings but more features are needed in order for this to be worth playing
+with.
+
+I'm currently working on UI, core TexnoMagic code, and modding integration.
+
+Getting there, stay tuned ⊂(✰‿✰)つ
+
+**teaser screenshot:**
+
+![Words of Power Editor teaser](doc/img/words_of_power_teaser.png)
 
 
 ## TexnoMagic
