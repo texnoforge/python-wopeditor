@@ -153,6 +153,7 @@ class WoPEditorApp(App):
                 text="draw something to save first").open()
             return
         drawing = TexnoMagicDrawing(curves=curves)
+        drawing.normalize()
         self.symbol.save_new_drawing(drawing)
         self.goto_symbol(self.symbol, back_from='newdrawing')
 

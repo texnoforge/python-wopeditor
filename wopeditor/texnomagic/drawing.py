@@ -77,7 +77,25 @@ class TexnoMagicDrawing:
                     writer.writerow([None, None])
                 writer.writerows(curve.tolist())
 
+    def normalize(self):
+        """
+        normalize drawing points in-place into <0, self.points_range> range
+        """
+        # move to [0,0]
+        self._points -= np.min(self._points, axis=0)
+        # normalize
+        k = self.points_range / np.max((np.max(np.max(self._points, axis=0)), 0.2))
+        self._points *= k
+        # center
+        offset = (self.points_range - np.max(self._points, axis=0)) / 2
+        self._points += offset
+
     def curves_fit_area(self, pos, size):
+        """
+        return curves scaled to fit area
+
+        useful for drawing curves in UI
+        """
         pos = np.array(pos)
         size = np.array(size)
 
