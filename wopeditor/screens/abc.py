@@ -1,3 +1,4 @@
+from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen
@@ -5,9 +6,11 @@ from kivy.uix.popup import Popup
 
 from wopeditor.texnomagic.symbol import TexnoMagicSymbol
 from wopeditor.texnomagic import common
+
 from wopeditor.widgets.labeledtextinput import LabeledTextInput
 from wopeditor.widgets.focusbutton import FocusButton
 from wopeditor.widgets.sidebar import Sidebar, SideButton
+from wopeditor.screens.symbol import DrawingButton
 
 
 Builder.load_string('''
@@ -40,10 +43,7 @@ Builder.load_string('''
 
 
 <SymbolButton>:
-    size: [max(self.texture_size[0] +40, 100), self.texture_size[1] + 40]
     font_size: 24
-    size_hint: None, None
-    on_release: app.goto_symbol(self.symbol)
 
 
 <NewSymbolPopup>:
@@ -106,12 +106,16 @@ class AbcScreen(Screen):
         common.open_dir(self.abc.info_path, select=True)
 
 
-class SymbolButton(Button):
+class SymbolButton(DrawingButton):
     def __init__(self, **kwargs):
         self.symbol = kwargs.pop('symbol', None)
         if self.symbol:
             kwargs['text'] = self.symbol.name
+            kwargs['drawing'] = self.symbol.get_random_drawing()
         super().__init__(**kwargs)
+
+    def on_release(self):
+        App.get_running_app().goto_symbol(self.symbol)
 
 
 class NewSymbolPopup(Popup):

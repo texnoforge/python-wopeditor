@@ -1,5 +1,6 @@
 import json
 import os
+import random
 import time
 
 from wopeditor.texnomagic import common
@@ -71,6 +72,11 @@ class TexnoMagicSymbol:
         if self._drawings is None:
             self.load_drawings()
         return self._drawings
+
+    def get_random_drawing(self):
+        if self.drawings:
+            return random.choice(self.drawings)
+        return None
 
     def __repr__(self):
         return '<TexnoMagicSymbol %s (%s) @ %s>' % (self.name, self.meaning, self.base_path)

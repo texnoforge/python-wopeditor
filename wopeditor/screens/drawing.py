@@ -38,9 +38,10 @@ class DrawingScreen(Screen):
 
     def update_drawing(self, drawing=None):
         if drawing:
-            if drawing == self.drawing:
-                return
             self.drawing = drawing
+        if not self.drawing:
+            return
+
         drawing_preview = self.ids['drawing_preview']
         drawing_preview.update_drawing(drawing=self.drawing)
         self.ids['header'].title = self.drawing.name

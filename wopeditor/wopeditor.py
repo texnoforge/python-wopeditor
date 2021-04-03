@@ -122,13 +122,16 @@ class WoPEditorApp(App):
         if symbol:
             self.symbol = symbol
             screen.update_symbol(symbol)
+        elif back_from == 'newdrawing':
+            screen.update_symbol()
         self.goto_screen(screen, back=back_from)
 
-    def goto_drawing(self, drawing):
+    def goto_drawing(self, drawing=None, back_from=None):
         screen = self.get_screen('drawing')
-        self.drawing = drawing
-        screen.update_drawing(drawing)
-        self.goto_screen(screen)
+        if drawing:
+            self.drawing = drawing
+            screen.update_drawing(drawing)
+        self.goto_screen(screen, back=back_from)
 
     def goto_new_drawing(self):
         screen = self.get_screen('newdrawing')
@@ -162,6 +165,8 @@ class WoPEditorApp(App):
         drawing = TexnoMagicDrawing(curves=curves)
         drawing.normalize()
         self.symbol.save_new_drawing(drawing)
+        # update alphabet screen
+        self.get_screen('abc').update_abc(self.abc)
         self.goto_symbol(self.symbol, back_from='newdrawing')
 
 

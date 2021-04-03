@@ -1,3 +1,4 @@
+from kivy.app import App
 from kivy.lang import Builder
 from kivy.graphics import Color, Line
 from kivy.uix.button import Button
@@ -43,7 +44,6 @@ Builder.load_string('''
 <DrawingButton>:
     size: [160, 160]
     size_hint: None, None
-    on_release: app.goto_drawing(self.drawing)
 ''')
 
 
@@ -79,7 +79,7 @@ class DrawingButton(Button):
         self.bind(size=self.update_drawing,
                   pos=self.update_drawing)
 
-    def update_drawing(self, *args, drawing=None):
+    def update_drawing(self, *_, drawing=None):
         if drawing:
             self.drawing = drawing
         if not self.drawing:
@@ -89,10 +89,14 @@ class DrawingButton(Button):
         size = list(map(lambda x: x * (1 - 2 * padding_r), self.size))
         pos = [self.pos[0] + size[0] * padding_r, self.pos[1] + size[1] * padding_r]
 
-        self.text = self.drawing.name
+        if not self.text:
+            self.text = self.drawing.name
         self.canvas.after.clear()
         #self.canvas.clear()
         with self.canvas.after:
             Color(0.7, 0.7, 0.0)
             for curve in self.drawing.curves_fit_area(pos, size):
                 Line(points=curve.tolist())
+
+    def on_release(self):
+        App.get_running_app().goto_drawing(self.drawing)
