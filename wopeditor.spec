@@ -2,7 +2,6 @@
 # this is a .spec file for PyInstaller used to create windows package
 
 datas = [
-    ('wopeditor/screens/*.kv', 'screens'),
     ('data', 'data'),
 ]
 

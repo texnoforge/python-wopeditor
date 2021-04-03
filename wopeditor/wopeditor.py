@@ -13,18 +13,17 @@ from kivy.uix.button import Button
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 
+from wopeditor.texnomagic.abcs import TexnoMagicAlphabets
+from wopeditor.texnomagic.drawing import TexnoMagicDrawing
+from wopeditor.texnomagic import common
+
 from wopeditor.screens.abcs import AbcsScreen
 from wopeditor.screens.abc import AbcScreen
 from wopeditor.screens.symbol import SymbolScreen
 from wopeditor.screens.drawing import DrawingScreen
 from wopeditor.screens.newdrawing import NewDrawingScreen
 
-from wopeditor.widgets.header import Header
 from wopeditor.widgets.errorpopup import ErrorPopup
-
-from wopeditor.texnomagic.abcs import TexnoMagicAlphabets
-from wopeditor.texnomagic.drawing import TexnoMagicDrawing
-from wopeditor.texnomagic import common
 
 
 if getattr(sys, 'frozen', False):
@@ -35,6 +34,15 @@ else:
 
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
+
+
+SCREENS = {
+    'abcs': AbcsScreen,
+    'abc': AbcScreen,
+    'symbol': SymbolScreen,
+    'drawing': DrawingScreen,
+    'newdrawing': NewDrawingScreen,
+}
 
 
 class WoPEditorApp(App):
@@ -81,9 +89,8 @@ class WoPEditorApp(App):
         return self.root.switch_to(screen, direction=direction)
 
     def load_screen(self, screen_name):
-        fn = self.base_path.joinpath('screens/%s.kv' % screen_name)
-        Logger.info("WoPEditor: loading screen data: %s" % fn)
-        screen = Builder.load_file(str(fn))
+        screen_class = SCREENS[screen_name]
+        screen = screen_class()
         assert screen
         self.screens[screen_name] = screen
         return screen

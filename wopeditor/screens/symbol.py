@@ -1,9 +1,50 @@
+from kivy.lang import Builder
 from kivy.graphics import Color, Line
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen
 
 from wopeditor.texnomagic import common
 from wopeditor.widgets.nicescrollview import NiceScrollView
+
+
+Builder.load_string('''
+<SymbolScreen>:
+    name: "symbol"
+
+    GridLayout:
+        cols: 1
+        padding: [10, 0]
+
+        Header:
+            id: header
+            on_press_back: app.goto_abc(back_from=root.name)
+
+        BoxLayout:
+            Sidebar:
+                id: sidebar
+                SideButton:
+                    text: "new drawing"
+                    on_release: app.goto_new_drawing()
+                SideButton:
+                    text: "open dir"
+                    on_release: root.open_dir()
+                FloatLayout:
+                    #Filler
+
+            NiceScrollView:
+                id: main_scroll
+                StackLayout:
+                    id: drawings_list
+                    size_hint: 1, None
+                    height: max(main_scroll.height, self.minimum_height)
+                    spacing: 10
+
+
+<DrawingButton>:
+    size: [160, 160]
+    size_hint: None, None
+    on_release: app.goto_drawing(self.drawing)
+''')
 
 
 class SymbolScreen(Screen):

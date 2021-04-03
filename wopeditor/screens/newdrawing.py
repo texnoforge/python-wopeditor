@@ -1,9 +1,50 @@
+from kivy.lang import Builder
 from kivy.graphics import Color, Line
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import Screen
 from kivy.uix.floatlayout import FloatLayout
 
 from wopeditor.widgets.drawingpreview import DrawingPreview
+
+
+Builder.load_string('''
+<NewDrawingScreen>:
+    name: "newdrawing"
+
+    GridLayout:
+        cols: 1
+        padding: [10, 10]
+
+        Header:
+            id: header
+            title: "new symbol drawing"
+            on_press_back: app.goto_symbol(back_from=root.name)
+
+        BoxLayout:
+            Sidebar:
+                id: sidebar
+                SideButton:
+                    text: "clear"
+                    on_release: root.ids['drawing_area'].clear()
+                SideButton:
+                    text: "save"
+                    on_release: app.save_drawing()
+                FloatLayout:
+                    #Filler
+
+            DrawingArea:
+                id: drawing_area
+
+<DrawingArea>:
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            width: 1
+            rectangle: self.x, self.y, self.width, self.height
+            dash_length: 6
+            dash_offset: 4
+''')
 
 
 class NewDrawingScreen(Screen):

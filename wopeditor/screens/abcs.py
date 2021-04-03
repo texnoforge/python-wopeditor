@@ -1,3 +1,4 @@
+from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
@@ -7,6 +8,78 @@ from kivy.uix.popup import Popup
 
 from wopeditor.texnomagic import common
 from wopeditor.texnomagic.abc import TexnoMagicAlphabet
+
+from wopeditor.widgets.header import Header
+
+
+Builder.load_string('''
+<AbcsScreen>:
+    name: "abcs"
+
+    GridLayout:
+        cols: 1
+        padding: [10, 0]
+
+        Header:
+            title: "alphabets"
+
+        BoxLayout:
+            Sidebar:
+                id: sidebar
+                SideButton:
+                    text: "new alphabet"
+                    on_release: root.show_create_new_abc()
+                SideButton:
+                    text: "open dir"
+                    on_release: root.open_dir()
+                FloatLayout:
+                    #Filler
+
+            BoxLayout:
+                id: abcs_lists
+                orientation: 'vertical'
+
+
+<AbcButton>:
+    size_hint: None, None
+    size: [self.texture_size[0] + dp(40), dp(72)]
+    font_size: dp(36)
+    on_release: app.goto_abc(self.abc)
+
+
+<NewAbcPopup>:
+    size_hint: None, None
+    width: 400
+    height: name_input.height * 2 + confirm_button.height + self.title_size + dp(80)
+    title: "create new alphabet"
+    on_open: name_input.ids['text_input'].focus = True
+    on_confirm: app.add_new_abc(self.abc)
+    BoxLayout:
+        id: content
+        orientation: 'vertical'
+        padding: [0, 5, 0, 0]
+        spacing: 5
+        LabeledTextInput:
+            id: name_input
+            label_text: "name:"
+            focus: True
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'top'
+            Label:
+                id: warning_label
+                color: 'red'
+                text: ''
+
+        FocusButton:
+            id: confirm_button
+            text: 'CREATE NEW ALPHABET'
+            size_hint: 1, None
+            font_size: '20sp'
+            height: self.texture_size[1] * 2.2
+            on_release: root.confirm()
+''')
+
 
 
 class AbcsScreen(Screen):
