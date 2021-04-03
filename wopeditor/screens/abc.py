@@ -3,7 +3,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.popup import Popup
 
 from wopeditor.texnomagic.symbol import TexnoMagicSymbol
-from wopeditor.texnomagic import common 
+from wopeditor.texnomagic import common
 from wopeditor.widgets.labeledtextinput import LabeledTextInput
 from wopeditor.widgets.focusbutton import FocusButton
 from wopeditor.widgets.sidebar import Sidebar, SideButton
