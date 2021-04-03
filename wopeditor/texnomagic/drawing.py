@@ -1,4 +1,6 @@
 import csv
+import itertools
+import numpy as np
 
 
 class TexnoMagicDrawing:
@@ -6,11 +8,21 @@ class TexnoMagicDrawing:
     def __init__(self, path=None, curves=None, points_range=1000.0):
         self.path = path
         self.points_range = points_range
-        self._curves = curves
+        self._curves = None
+        self._points = None
+        if curves:
+            self.set_curves(curves)
+
 
     @property
     def curves(self):
         if self._curves is None:
+            self.load_curves()
+        return self._curves
+
+    @property
+    def points(self):
+        if self._points is None:
             self.load_curves()
         return self._curves
 
@@ -20,39 +32,37 @@ class TexnoMagicDrawing:
             return self.path.name
         return None
 
+    def set_curves(self, curves):
+        # keep all points in single continuous numpy array
+        self._points = np.array(list(itertools.chain(*curves)))
+        self._curves = []
+        i = 0
+        for curve in curves:
+            n = len(curve)
+            # curves are numpy views into main points array
+            cview = self._points[i:i+n]
+            self._curves.append(cview)
+            i += n
+
     def load(self, path=None):
         if path:
             self.path = path
         return self
 
     def load_curves(self):
-        self._curves = []
+        curves = []
         curve = []
         with self.path.open('r') as f:
             reader = csv.reader(f)
             for row in reader:
                 if row is None or '' in row:
-                    self._curves.append(curve)
+                    curves.append(curve)
                     curve = []
                     continue
-                curve.append(list(map(float, row)))
-        self._curves.append(curve)
-
-    def curves_fit_area(self, pos, size):
-        k = min(*size) / self.points_range
-        max_range = self.points_range * k
-        x_offset = pos[0] + (size[0] - max_range) / 2
-        y_offset = pos[1] + (size[1] - max_range) / 2
-
-        def scale_point(point):
-            return [x_offset + point[0] * k,
-                    y_offset + point[1] * k]
-
-        scurves = []
-        for curve in self.curves:
-            scurve = list(map(scale_point, curve))
-            scurves.append(scurve)
-        return scurves
+                point = list(map(float, row[:2]))
+                curve.append(point)
+        curves.append(curve)
+        self.set_curves(curves)
 
     def save(self):
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -63,6 +73,28 @@ class TexnoMagicDrawing:
                 if first:
                     first = False
                 else:
+                    # curves separator
                     writer.writerow([None, None])
-                writer.writerows(curve)
+                writer.writerows(curve.tolist())
 
+    def curves_fit_area(self, pos, size):
+        pos = np.array(pos)
+        size = np.array(size)
+
+        k = np.min(size) / self.points_range
+        max_range = self.points_range * k
+
+        offset = pos + (size - max_range) / 2
+
+        scurves = []
+        for curve in self.curves:
+            if len(curve) > 0:
+                scurve = curve * k + offset
+            else:
+                scurve = curve
+            scurves.append(scurve)
+        return scurves
+
+    def __repr__(self):
+        return '<TexnoMagicDrawing @ %s: %d points in %d curves>' % (
+            self.path, len(self._points), len(self._curves))

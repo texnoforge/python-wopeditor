@@ -1,9 +1,6 @@
 from kivy.graphics import Color, Line
 from kivy.uix.widget import Widget
-from kivy.properties import StringProperty
-from kivy.factory import Factory
 from kivy.lang import Builder
-from kivy.clock import Clock
 
 
 Builder.load_string('''
@@ -28,4 +25,4 @@ class DrawingPreview(Widget):
         with self.canvas:
             Color(0.7, 0.7, 0.0)
             for curve in self.drawing.curves_fit_area(self.pos, self.size):
-                Line(points=curve)
+                Line(points=curve.tolist())

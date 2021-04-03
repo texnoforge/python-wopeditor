@@ -20,6 +20,7 @@ from wopeditor.screens.drawing import DrawingScreen
 from wopeditor.screens.newdrawing import NewDrawingScreen
 
 from wopeditor.widgets.header import Header
+from wopeditor.widgets.errorpopup import ErrorPopup
 
 from wopeditor.texnomagic.abcs import TexnoMagicAlphabets
 from wopeditor.texnomagic.drawing import TexnoMagicDrawing
@@ -146,6 +147,11 @@ class WoPEditorApp(App):
     def save_drawing(self):
         screen = self.get_screen('newdrawing')
         curves = screen.ids['drawing_area'].curves
+        if not curves:
+            ErrorPopup(
+                title="ERROR: empty drawing",
+                text="draw something to save first").open()
+            return
         drawing = TexnoMagicDrawing(curves=curves)
         self.symbol.save_new_drawing(drawing)
         self.goto_symbol(self.symbol, back_from='newdrawing')

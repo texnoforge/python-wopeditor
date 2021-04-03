@@ -54,4 +54,4 @@ class DrawingButton(Button):
         with self.canvas.after:
             Color(0.7, 0.7, 0.0)
             for curve in self.drawing.curves_fit_area(pos, size):
-                Line(points=curve)
+                Line(points=curve.tolist())

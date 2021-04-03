@@ -73,4 +73,4 @@ class TexnoMagicSymbol:
         return self._drawings
 
     def __repr__(self):
-        return 'TexnoMagicSymbol %s (%s) @ %s' % (self.name, self.meaning, self.base_path)
+        return '<TexnoMagicSymbol %s (%s) @ %s>' % (self.name, self.meaning, self.base_path)
