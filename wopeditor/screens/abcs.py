@@ -24,6 +24,7 @@ Builder.load_string('''
         padding: [10, 0]
 
         Header:
+            id: header
             title: "alphabets"
 
         BoxLayout:
@@ -126,6 +127,11 @@ Builder.load_string('''
 class AbcsScreen(Screen):
     abcs = []
     mods = None
+
+    def __init__(self, *args):
+        super().__init__()
+        hdr = self.ids['header']
+        hdr.ids['back_layout'].remove_widget(hdr.ids['back'])
 
     def update_abcs(self, abcs=None, mods=None):
         if abcs:

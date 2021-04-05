@@ -25,6 +25,7 @@ Builder.load_string('''
         size_hint: None, None
 
         AnchorLayout:
+            id: back_layout
             size: [hdr_layout.size[0], hdr_label.size[1]]
             size_hint: None, None
             pos: [self.parent.pos[0], hdr_label.pos[1] - 10]

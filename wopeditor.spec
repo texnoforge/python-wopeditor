@@ -1,16 +1,12 @@
 # -*- mode: python ; coding: utf-8 -*-
 # this is a .spec file for PyInstaller used to create windows package
 
-datas = [
-    ('data', 'data'),
-]
-
 block_cipher = None
 
 a = Analysis(['wopeditor\\wopeditor.py'],
              pathex=['C:\\Users\\yac\\source\\py\\wopeditor'],
              binaries=[],
-             datas=datas,
+             datas=[],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],

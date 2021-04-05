@@ -18,6 +18,7 @@ from kivy.uix.button import Button
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 
+from wopeditor import __version__
 from wopeditor.texnomagic.abcs import TexnoMagicAlphabets
 from wopeditor.texnomagic.drawing import TexnoMagicDrawing
 from wopeditor.texnomagic import common
@@ -63,6 +64,8 @@ class WoPEditorApp(App):
     nursery = None
     mods = None
 
+    version = __version__
+
     async def app_start(self):
         """async entry point for trio"""
 
@@ -76,7 +79,7 @@ class WoPEditorApp(App):
             nursery.start_soon(run_wrapper)
 
     def build(self):
-        self.title = 'Words of Power Editor'
+        self.title = 'Words of Power Editor v%s' % self.version
         self.screens_available = ['abcs']
         self.base_path = Path(APP_PATH)
         return ScreenManager()
@@ -137,9 +140,13 @@ class WoPEditorApp(App):
         self.abcs = TexnoMagicAlphabets(paths)
         self.abcs.load()
 
-    def refresh(self, *args):
+    def reload_abcs(self, *args):
         self.load_abcs()
         self.get_screen('abcs').update_abcs(self.abcs)
+
+    def refresh(self, *args):
+        self.reload_abcs()
+        self.nursery.start_soon(self.load_community_mods)
 
     def goto_abcs(self, back_from=None):
         screen = self.get_screen('abcs')
@@ -215,7 +222,7 @@ class WoPEditorApp(App):
         Logger.info("mod: downloading mod into: %s", path)
         mod.download(path)
         Logger.info("mod: download complete: %s", mod)
-        Clock.schedule_once(self.refresh)
+        Clock.schedule_once(self.reload_abcs)
 
     def export_abc(self):
         Logger.info("mod: exporting alphabet: %s", self.abc)
