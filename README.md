@@ -20,13 +20,13 @@ symbols drawn by users in real-time.
 
 ## Status
 
-### early pre-alpha
+### first pre-alpha preview release 0.0.1 is here 🎉
 
 You can already use `wopeditor` to:
 
-* create and save new alphabets and symbols
+* create and save new magic symbols and alphabets
 * draw multiple drawings of a symbol using mouse or other pointing device
-* show and download community alphabets as mods from [mod.io]
+* view and download community alphabets as mods from [mod.io]
 * export alphabets as single .zip file you can upload to [mod.io]
 
 [mod.io]: https://wop.mod.io/
