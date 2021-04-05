@@ -41,6 +41,7 @@ else:
     APP_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
+Config.set('kivy', 'window_icon', 'wopeditor.ico')
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 Config.set('graphics', 'width', '1024')
 Config.set('graphics', 'height', '768')
