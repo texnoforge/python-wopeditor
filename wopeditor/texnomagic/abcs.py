@@ -32,7 +32,7 @@ class TexnoMagicAlphabets:
         if not stats:
             stats = ['no alphabets found :(']
 
-        return "TexnoMagicAlphabets: %s" % ", ".join(stats)
+        return "<TexnoMagicAlphabets: %s>" % ", ".join(stats)
 
 
 def get_alphabets(base_path):

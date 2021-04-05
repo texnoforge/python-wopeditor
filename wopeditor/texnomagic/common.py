@@ -31,7 +31,6 @@ def get_data_path():
 DATA_PATH = get_data_path()
 USER_DATA_PATH = DATA_PATH / 'user'
 MODS_DATA_PATH = DATA_PATH / 'mods'
-EXPORT_DATA_PATH = DATA_PATH / 'export'
-
+EXPORT_PATH = DATA_PATH / 'export'
 
 ALPHABETS_DIR = 'alphabets'

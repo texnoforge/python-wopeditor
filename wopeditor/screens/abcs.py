@@ -12,6 +12,7 @@ from wopeditor.texnomagic import common
 from wopeditor.texnomagic.abc import TexnoMagicAlphabet
 
 from wopeditor.widgets.header import Header
+from wopeditor.widgets.nicescrollview import NiceScrollView
 
 
 Builder.load_string('''
@@ -34,12 +35,19 @@ Builder.load_string('''
                 SideButton:
                     text: "open dir"
                     on_release: root.open_dir()
+                SideButton:
+                    text: "refresh"
+                    on_release: app.refresh()
                 FloatLayout:
                     #Filler
 
-            BoxLayout:
-                id: abcs_lists
-                orientation: 'vertical'
+            NiceScrollView:
+                id: main_scroll
+                BoxLayout:
+                    id: abcs_lists
+                    size_hint_y: None
+                    height: max(main_scroll.height, self.minimum_height)
+                    orientation: 'vertical'
 
 
 <AbcButton>:
@@ -47,6 +55,25 @@ Builder.load_string('''
     size: [self.texture_size[0] + dp(40), dp(72)]
     font_size: dp(36)
     on_release: app.goto_abc(self.abc)
+
+
+<ModButton>:
+    size: [340, 200]
+    size_hint: None, None
+    on_release: app.download_mod(self.mod)
+
+    AsyncImage:
+        id: bimg
+        size: [320, 180]
+        pos: [root.x + 10, root.y + 10]
+    AnchorLayout:
+        size: root.size
+        pos: root.pos
+        anchor_x: 'center'
+        anchor_y: 'center'
+        Label:
+            id: blabel
+            font_size: dp(36)
 
 
 <NewAbcPopup>:
@@ -96,15 +123,18 @@ Builder.load_string('''
 ''')
 
 
-
 class AbcsScreen(Screen):
     abcs = []
+    mods = None
 
-    def update_abcs(self, abcs=None):
+    def update_abcs(self, abcs=None, mods=None):
         if abcs:
             self.abcs = abcs
+        if mods:
+            self.mods = mods
         if not self.abcs:
             return
+
         abcs_lists = self.ids['abcs_lists']
         abcs_lists.clear_widgets()
         for tag, abcs in self.abcs.abcs.items():
@@ -113,14 +143,22 @@ class AbcsScreen(Screen):
             abcs_label = Factory.AbcsLabel(text=tag)
             abcs_lists.add_widget(abcs_label)
 
-            list_id = "%s_abcs_list" % tag
             abcs_list = Factory.AbcsLayout()
-
             for abc in abcs:
                 b = AbcButton(abc=abc)
                 abcs_list.add_widget(b)
-
             abcs_lists.add_widget(abcs_list)
+
+        if self.mods:
+            mods_label = Factory.AbcsLabel(text="online community mods")
+            abcs_lists.add_widget(mods_label)
+
+            mods_list = Factory.AbcsLayout()
+            for mod in self.mods:
+                b = Factory.ModButton(mod=mod)
+                mods_list.add_widget(b)
+            abcs_lists.add_widget(mods_list)
+
         # filler
         abcs_lists.add_widget(BoxLayout())
         Logger.info("abcs: updated: %s", self.abcs)
@@ -144,6 +182,21 @@ class AbcButton(Button):
         if self.abc:
             kwargs['text'] = self.abc.name
         super().__init__(**kwargs)
+
+
+class ModButton(Button):
+    def __init__(self, **kwargs):
+        self.mod = kwargs.pop('mod', None)
+        if self.mod:
+            kwargs['text'] = self.mod.name
+        super().__init__(**kwargs)
+        self.update()
+
+    def update(self):
+        if not self.mod:
+            return
+        self.ids['bimg'].source = self.mod.logo_url
+        self.ids['blabel'].text = self.mod.name
 
 
 class NewAbcPopup(Popup):

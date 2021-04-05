@@ -1,7 +1,9 @@
 import json
 import os
+from pathlib import Path
+import shutil
 
-from wopeditor.texnomagic import common 
+from wopeditor.texnomagic import common
 from wopeditor.texnomagic.symbol import TexnoMagicSymbol
 
 
@@ -56,6 +58,21 @@ class TexnoMagicAlphabet:
         symbol.base_path = self.symbols_path / common.name2fn(symbol.name)
         symbol.save()
         return self._symbols.insert(0, symbol)
+
+    def export(self, out_path=None):
+        """
+        export alphabet into a zipfile
+        """
+        if not out_path:
+            out_path = common.EXPORT_PATH
+
+        ar_fn = self.base_path.name
+        out_fn = out_path / ar_fn
+        return shutil.make_archive(
+            out_fn, 'zip',
+            root_dir=self.base_path.parent,
+            base_dir=self.base_path.name,
+        )
 
     @property
     def symbols(self):

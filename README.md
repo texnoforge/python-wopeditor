@@ -20,15 +20,21 @@ symbols drawn by users in real-time.
 
 ## Status
 
-### early development, not very useful yet ¯\\\_(ツ)\_/¯
+### early pre-alpha
 
-You can already use this to create and save new symbols/alphabets including
-drawings but more features are needed in order for this to be worth playing
-with.
+You can already use `wopeditor` to:
 
-I'm currently working on UI, core TexnoMagic code, and modding integration.
+* create and save new alphabets and symbols
+* draw multiple drawings of a symbol using mouse or other pointing device
+* show and download community alphabets as mods from [mod.io]
+* export alphabets as single .zip file you can upload to [mod.io]
 
-Getting there, stay tuned ⊂(✰‿✰)つ
+[mod.io]: https://wop.mod.io/
+
+Even though there isn't any recognition functionality yet, `wopeditor` can be
+used to create, modify, store, and share magic symbols in **TexnoMagic** format.
+
+With core features complete, it's time for some science ⊂(✰‿✰)つ
 
 **teaser screenshot:**
 
@@ -115,6 +121,11 @@ Contributions, suggestions, and ideas are always welcome!
 * draw symbols using mouse and save to files
 * browse and preview symbols loaded from disk
 * easily open relevant files in file manager
+
+### mods
+
+* show and download mods from [mod.io]
+* export symbols/alphabets to zip files/[mod.io]
 
 ### code
 

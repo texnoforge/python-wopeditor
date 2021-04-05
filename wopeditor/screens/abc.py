@@ -34,6 +34,9 @@ Builder.load_string('''
                 SideButton:
                     text: "open dir"
                     on_release: root.open_dir()
+                SideButton:
+                    text: "export"
+                    on_release: app.export_abc()
                 FloatLayout:
                     #Filler
 

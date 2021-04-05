@@ -1,9 +1,14 @@
 from configparser import InterpolationSyntaxError
+from functools import partial
 import sys, os
 from pathlib import Path
 
+import trio
+
 from kivy.app import App
+from kivy.app import async_runTouchApp
 from kivy.config import Config
+from kivy.clock import Clock
 from kivy.factory import Factory
 from kivy.lang import Builder
 from kivy.logger import Logger
@@ -16,6 +21,8 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from wopeditor.texnomagic.abcs import TexnoMagicAlphabets
 from wopeditor.texnomagic.drawing import TexnoMagicDrawing
 from wopeditor.texnomagic import common
+
+from wopeditor import wopmods
 
 from wopeditor.screens.abcs import AbcsScreen
 from wopeditor.screens.abc import AbcScreen
@@ -52,21 +59,49 @@ class WoPEditorApp(App):
     current_title = StringProperty()
     screen_names = ListProperty([])
 
+    screens = {}
+    nursery = None
+    mods = None
+
+    async def app_start(self):
+        """async entry point for trio"""
+
+        async with trio.open_nursery() as nursery:
+            self.nursery = nursery
+
+            async def run_wrapper():
+                await self.async_run(async_lib='trio')
+                nursery.cancel_scope.cancel()
+
+            nursery.start_soon(run_wrapper)
+
     def build(self):
         self.title = 'Words of Power Editor'
-        self.screens = {}
         self.screens_available = ['abcs']
         self.base_path = Path(APP_PATH)
         return ScreenManager()
 
     def on_start(self):
-        Logger.info("WoPeditor: base path: %s" % self.base_path)
+        Logger.info("wopeditor: base path: %s" % self.base_path)
         self.load_abcs()
         self.goto_abcs()
+        # schedule loading of online mods
+        self.nursery.start_soon(self.load_community_mods)
+
         # DEBUG
         #self.goto_abc(self.abcs.abcs['user'][0])
         #self.goto_symbol(self.abc.symbols[1])
         #self.goto_drawing(self.symbol.drawings[0])
+
+    async def load_community_mods(self):
+        Logger.info("wopeditor: loading community mods in the background")
+        self.mods = wopmods.get_online_mods()
+        Logger.info("wopeditor: found %d community mods", len(self.mods))
+        Clock.schedule_once(self.update_mods)
+
+    def update_mods(self, *args):
+        screen = self.get_screen('abcs')
+        screen.update_abcs(mods=self.mods)
 
     @property
     def core_data_path(self):
@@ -101,6 +136,10 @@ class WoPEditorApp(App):
         }
         self.abcs = TexnoMagicAlphabets(paths)
         self.abcs.load()
+
+    def refresh(self, *args):
+        self.load_abcs()
+        self.get_screen('abcs').update_abcs(self.abcs)
 
     def goto_abcs(self, back_from=None):
         screen = self.get_screen('abcs')
@@ -167,6 +206,27 @@ class WoPEditorApp(App):
         self.get_screen('abc').update_abc(self.abc)
         self.goto_symbol(self.symbol, back_from='newdrawing')
 
+    def download_mod(self, mod):
+        Logger.info("mod: requesting mod download: %s", mod)
+        self.nursery.start_soon(self.dl_mod, mod)
+
+    async def dl_mod(self, mod):
+        path = common.MODS_DATA_PATH / common.ALPHABETS_DIR
+        Logger.info("mod: downloading mod into: %s", path)
+        mod.download(path)
+        Logger.info("mod: download complete: %s", mod)
+        Clock.schedule_once(self.refresh)
+
+    def export_abc(self):
+        Logger.info("mod: exporting alphabet: %s", self.abc)
+        path = self.abc.export()
+        Logger.info("mod: export complete: %s", path)
+        common.open_dir(path, select=True)
+
+def run_app():
+    trio.run(WoPEditorApp().app_start)
+    pass
+
 
 if __name__ == "__main__":
-    WoPEditorApp().run()
+    run_app()
