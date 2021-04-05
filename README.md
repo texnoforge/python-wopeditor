@@ -98,6 +98,14 @@ python wopeditor.py
 wopeditor.bat
 ```
 
+## Bugs and Feature Requests
+
+Please use [GitHub Issues](https://github.com/texnoforge/wopeditor/issues)
+to report any problems or feature requests.
+
+Contributions, suggestions, and ideas are always welcome!
+
+
 
 ## Current Features
 
@@ -126,3 +134,9 @@ wopeditor.bat
 * export alphabets/symbols as mods
 * online mod browser integration
 * **more**
+
+
+## Contact
+
+Feel free to drop by
+[#wopeditor @ texnoforge discord](https://discord.gg/Dq3vaeg3pG).
