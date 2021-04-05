@@ -15,21 +15,19 @@ recognize the symbol from user input.
 
 Entire alphabets of symbols with names, meanings, and graphical
 representations can be created including models to recognize individual
-symbols drawn by users in real-time.
+symbols drawn by users in real-time (once it's done).
 
 
 ## Status
 
-### first pre-alpha preview release 0.0.1 is here 🎉
+### first pre-alpha release v0.0.1 is here 🎉
 
-You can already use `wopeditor` to:
+You can use [wopeditor v0.0.1][v0.0.1] to:
 
 * create and save new magic symbols and alphabets
 * draw multiple drawings of a symbol using mouse or other pointing device
 * view and download community alphabets as mods from [mod.io]
 * export alphabets as single .zip file you can upload to [mod.io]
-
-[mod.io]: https://wop.mod.io/
 
 Even though there isn't any recognition functionality yet, `wopeditor` can be
 used to create, modify, store, and share magic symbols in **TexnoMagic** format.
@@ -59,6 +57,18 @@ scientific package to train symbol models using GMMs and recognize symbols
 using these models. I've already prototyped this and confirmed it works, this
 is an attempt at serious implementation which can be reused in other software
 and/or used as a reference.
+
+
+## Windows Installer
+
+On Windows you can use installer which is provided with each [release][releases].
+
+Choose a [release][releases], select **Assets**, download `wopeditor-*_installer.exe` file and run it.
+
+### Recommended Windows Download
+
+* [wopeditor-0.0.1_installer.exe](https://github.com/texnoforge/wopeditor/releases/download/v0.0.1/wopeditor-0.0.1_installer.exe)
+  ([v0.0.1 release][v0.0.1])
 
 
 ## Requirements Installation
@@ -151,3 +161,8 @@ Contributions, suggestions, and ideas are always welcome!
 
 Feel free to drop by
 [#wopeditor @ texnoforge discord](https://discord.gg/Dq3vaeg3pG).
+
+
+[releases]: https://github.com/texnoforge/wopeditor/releases
+[mod.io]: https://wop.mod.io/
+[v0.0.1]: https://github.com/texnoforge/wopeditor/releases/tag/v0.0.1
