@@ -3,7 +3,8 @@ import glob
 from pathlib import Path
 
 from wopeditor.texnomagic.abc import TexnoMagicAlphabet
-from wopeditor.texnomagic import common 
+from wopeditor.texnomagic import common
+
 
 
 class TexnoMagicAlphabets:

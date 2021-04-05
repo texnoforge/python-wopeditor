@@ -1,7 +1,9 @@
+from kivy.factory import Factory
 from kivy.lang import Builder
 from kivy.logger import Logger
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.label import Label
 from kivy.uix.screenmanager import Screen
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.popup import Popup
@@ -78,6 +80,19 @@ Builder.load_string('''
             font_size: '20sp'
             height: self.texture_size[1] * 2.2
             on_release: root.confirm()
+
+
+<AbcsLabel@Label>:
+    font_size: dp(24)
+    size_hint: None, None
+    size: self.texture_size
+
+
+<AbcsLayout@StackLayout>:
+    spacing: 5
+    size_hint_y: None
+    height: self.minimum_height
+    padding: [0, 5]
 ''')
 
 
@@ -95,11 +110,11 @@ class AbcsScreen(Screen):
         for tag, abcs in self.abcs.abcs.items():
             if not abcs:
                 continue
+            abcs_label = Factory.AbcsLabel(text=tag)
+            abcs_lists.add_widget(abcs_label)
 
             list_id = "%s_abcs_list" % tag
-            abcs_list = StackLayout(
-                size_hint=(1,None),
-                spacing=5)
+            abcs_list = Factory.AbcsLayout()
 
             for abc in abcs:
                 b = AbcButton(abc=abc)

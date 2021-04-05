@@ -34,6 +34,8 @@ else:
 
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
+Config.set('graphics', 'width', '1024')
+Config.set('graphics', 'height', '768')
 
 
 SCREENS = {
@@ -67,12 +69,8 @@ class WoPEditorApp(App):
         #self.goto_drawing(self.symbol.drawings[0])
 
     @property
-    def core_abcs_path(self):
-        return self.base_path / 'data' / 'alphabets'
-
-    @property
-    def user_abcs_path(self):
-        return common.get_appdata_path() / 'alphabets'
+    def core_data_path(self):
+        return self.base_path / 'data'
 
     def get_screen(self, screen_name):
         screen = self.screens.get(screen_name)
@@ -97,9 +95,9 @@ class WoPEditorApp(App):
 
     def load_abcs(self):
         paths = {
-            'core': self.core_abcs_path,
-            'user': self.user_abcs_path,
-            'community': Path("c:/invalid/path"),
+            'core': self.core_data_path / common.ALPHABETS_DIR,
+            'user': common.USER_DATA_PATH / common.ALPHABETS_DIR,
+            'mods': common.MODS_DATA_PATH / common.ALPHABETS_DIR,
         }
         self.abcs = TexnoMagicAlphabets(paths)
         self.abcs.load()
