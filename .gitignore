@@ -2,5 +2,6 @@ __pycache__
 /build
 /dist
 /data
+/site
 /wopeditor/data
 /.vscode/settings.json
