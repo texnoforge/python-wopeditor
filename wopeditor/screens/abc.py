@@ -7,6 +7,7 @@ from kivy.uix.popup import Popup
 from wopeditor.texnomagic.symbol import TexnoMagicSymbol
 from wopeditor.texnomagic import common
 
+from wopeditor import platform
 from wopeditor.widgets.labeledtextinput import LabeledTextInput
 from wopeditor.widgets.focusbutton import FocusButton
 from wopeditor.widgets.sidebar import Sidebar, SideButton
@@ -106,7 +107,7 @@ class AbcScreen(Screen):
         NewSymbolPopup().open()
 
     def open_dir(self):
-        common.open_dir(self.abc.info_path, select=True)
+        platform.open_dir(self.abc.info_path, select=True)
 
 
 class SymbolButton(DrawingButton):

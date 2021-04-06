@@ -2,9 +2,9 @@ from kivy.lang import Builder
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen
 
-from wopeditor.widgets.drawingpreview import DrawingPreview
-
+from wopeditor import platform
 from wopeditor.texnomagic import common
+from wopeditor.widgets.drawingpreview import DrawingPreview
 
 
 Builder.load_string('''
@@ -47,4 +47,4 @@ class DrawingScreen(Screen):
         self.ids['header'].title = self.drawing.name
 
     def open_dir(self):
-        common.open_dir(self.drawing.path, select=True)
+        platform.open_dir(self.drawing.path, select=True)

@@ -8,6 +8,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.popup import Popup
 
+from wopeditor import platform
 from wopeditor.texnomagic import common
 from wopeditor.texnomagic.abc import TexnoMagicAlphabet
 
@@ -179,7 +180,7 @@ class AbcsScreen(Screen):
         if not p.exists():
             p.mkdir(parents=True)
 
-        common.open_dir(p)
+        platform.open_dir(p)
 
 
 class AbcButton(Button):

@@ -19,6 +19,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 from wopeditor import __version__
+from wopeditor import platform
 from wopeditor.texnomagic.abcs import TexnoMagicAlphabets
 from wopeditor.texnomagic.drawing import TexnoMagicDrawing
 from wopeditor.texnomagic import common
@@ -229,7 +230,7 @@ class WoPEditorApp(App):
         Logger.info("mod: exporting alphabet: %s", self.abc)
         path = self.abc.export()
         Logger.info("mod: export complete: %s", path)
-        common.open_dir(path, select=True)
+        platform.open_dir(path, select=True)
 
 def run_app():
     trio.run(WoPEditorApp().app_start)

@@ -4,6 +4,7 @@ from kivy.graphics import Color, Line
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen
 
+from wopeditor import platform
 from wopeditor.texnomagic import common
 from wopeditor.widgets.nicescrollview import NiceScrollView
 
@@ -65,7 +66,7 @@ class SymbolScreen(Screen):
         self.ids['header'].title = title
 
     def open_dir(self):
-        common.open_dir(self.symbol.info_path, select=True)
+        platform.open_dir(self.symbol.info_path, select=True)
 
 
 class DrawingButton(Button):
