@@ -4,7 +4,7 @@ nav:
   - README.md
   - intro.md
   - install.md
-  - core_symbols_challenge.md
+  - core_symbols.md
 markdown_extensions:
   - admonition
   - toc:

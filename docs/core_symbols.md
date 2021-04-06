@@ -7,7 +7,7 @@ As a first step we need to create atomic elements of [Magic][magic] - **symbols*
 I've selected an initial set of symbols that will serve as a solid base for a
 magic system and I need **you** to help me find their representations!
 
-In other words, I want you to **draw me symbols for basic concepts** below.
+In other words, I want you to **draw symbols for basic concepts** below.
 
 ## Symbol Drawing
 

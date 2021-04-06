@@ -24,7 +24,7 @@ You can use [wopeditor v0.0.1][v0.0.1] to:
 Even though there isn't any recognition functionality yet, `wopeditor` can be
 used to create, modify, store, and share magic symbols in **TexnoMagic** format.
 
-With basic features complete, it's time for some science ⊂(✰‿✰)つ
+With basic features complete, it's time for [Core Symbols Challenge](core_symbols.md) ⊂(✰‿✰)つ
 
 ### screenshot
 
