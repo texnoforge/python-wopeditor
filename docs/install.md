@@ -19,10 +19,22 @@ Choose a [release][releases], select **Assets**, download `wopeditor-*_installer
 Packages aren't available for other platforms, please use the Source.
 
 
-## Running from Source (easy, no compilation)
+## Running from Source (easy)
 
 You should be ablo to run `wopeditor` from source on many different systems
 supported by Kivy framework including Linux, Windows, Mac, and Android.
+
+### Getting Sources
+
+You can get latest sources using `git`:
+
+```
+git clone https://github.com/texnoforge/wopeditor
+cd wopeditor
+```
+
+Or you can download [release](https://github.com/texnoforge/wopeditor/releases)
+archive and unpack it somewhere.
 
 
 ### Requirements
@@ -34,7 +46,7 @@ supported by Kivy framework including Linux, Windows, Mac, and Android.
 On windows get [Python 3 installer](https://www.python.org/downloads/) which
 includes `pip`.
 
-On linux distros, it's usually available as `python3` package.
+On linux distros, it's usually available as `python3` package. Make sure to install `pip` as well.
 
 Debian and clones using `.deb` (Ubuntu, Mint, ...):
 
@@ -51,18 +63,10 @@ sudo dnf install python3 python3-pip
 #### Required Python Modules
 
 Required modules are listed in `requirements.txt` file and are all
-available from PyPI to be installed using `pip`:
+available from PyPI to be installed using `pip`.
 
-```
-pip install -r requirements.txt
-```
-
-On some systems you need to use `pip3` instead to invoke Python 3 `pip` (as
-opposed to Python 2 which won't work):
-
-```
-pip3 install -r requirements.txt
-```
+They should be automatically installed during `wopeditor` installation, no need
+to install them manually.
 
 A short summary of used modules:
 
@@ -71,44 +75,41 @@ A short summary of used modules:
 
 * [Trio](https://trio.readthedocs.io/en/stable/) python async module
 
-Please refer to `requirements.txt` file for up-to-date list of requirements,
 
+### Install wopeditor Module
 
-### Getting Sources
-
-You can get latest sources using `git`:
+Run following in top level of `wopeditor` source dir:
 
 ```
-git clone https://github.com/texnoforge/wopeditor
-cd wopeditor
+pip install .
 ```
 
-Or you can download [release](https://github.com/texnoforge/wopeditor/releases)
-archive and unpack it somewhere.
+If you want to modify `wopeditor`, use `--editable` mode:
+
+```
+pip install -e .
+```
+
+or directly:
+
+```
+python setup.py develop
+```
 
 
 ### Starting wopeditor
 
-After you've installed requirements above and obtained `wopeditor` sources,
-enter top directory and run following command depending on your system:
-
-
-#### any system
+After you've installed `wopeditor` module, you can run it from anywhere:
 
 ```
-python wopeditor.py
+python -m wopeditor
 ```
 
-#### linux/unix
+Furthermore, a `wopeditor` script is installed somewhere by `pip`. If it
+happens to be in your `$PATH`, you can use it instead:
 
 ```
-./wopeditor.py
-```
-
-#### windows
-
-```
-wopeditor.bat
+wopeditor
 ```
 
 

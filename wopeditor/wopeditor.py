@@ -232,9 +232,16 @@ class WoPEditorApp(App):
         Logger.info("mod: export complete: %s", path)
         platform.open_dir(path, select=True)
 
+    def train_symbol_model(self):
+        Logger.info("model: training symbol model from drawings: %s", self.symbol)
+        self.symbol.train_model_from_drawings()
+        Logger.info("model: saving @ %s", self.symbol.model.data_path)
+        self.symbol.model.save()
+        self.get_screen('symbol').update_model()
+
+
 def run_app():
     trio.run(WoPEditorApp().app_start)
-    pass
 
 
 if __name__ == "__main__":
