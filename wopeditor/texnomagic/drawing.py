@@ -13,7 +13,6 @@ class TexnoMagicDrawing:
         if curves:
             self.set_curves(curves)
 
-
     @property
     def curves(self):
         if self._curves is None:
@@ -24,7 +23,7 @@ class TexnoMagicDrawing:
     def points(self):
         if self._points is None:
             self.load_curves()
-        return self._curves
+        return self._points
 
     @property
     def name(self):

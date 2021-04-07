@@ -1,10 +1,12 @@
 import json
+import numpy as np
 import os
 import random
 import time
 
 from wopeditor.texnomagic import common
 from wopeditor.texnomagic.drawing import TexnoMagicDrawing
+from wopeditor.texnomagic.model import TexnoMagicSymbolModel
 
 
 class TexnoMagicSymbol:
@@ -13,6 +15,7 @@ class TexnoMagicSymbol:
         self.meaning = meaning
         self.base_path = base_path
         self._drawings = None
+        self._model = None
 
     @property
     def info_path(self):
@@ -26,10 +29,16 @@ class TexnoMagicSymbol:
     def model_path(self):
         return self.base_path / 'model'
 
+    @property
+    def model(self):
+        if self._model is None:
+            self.load_model()
+        return self._model
+
     def load(self, base_path=None):
         if base_path:
             self.base_path = base_path
-        
+
         assert self.base_path
         info = json.load(self.info_path.open())
 
@@ -47,6 +56,11 @@ class TexnoMagicSymbol:
             drawing = TexnoMagicDrawing()
             drawing.load(drawing_path)
             self._drawings.append(drawing)
+
+    def load_model(self):
+        model = TexnoMagicSymbolModel()
+        model.load(self.model_path)
+        self._model = model
 
     def save(self):
         os.makedirs(self.base_path, exist_ok=True)
@@ -73,10 +87,17 @@ class TexnoMagicSymbol:
             self.load_drawings()
         return self._drawings
 
+    def get_all_drawing_points(self):
+        return np.concatenate([d.points for d in self.drawings])
+
     def get_random_drawing(self):
         if self.drawings:
             return random.choice(self.drawings)
         return None
+
+    def train_model_from_drawings(self):
+        data = self.get_all_drawing_points()
+        self.model.train(data)
 
     def __repr__(self):
         return '<TexnoMagicSymbol %s (%s) @ %s>' % (self.name, self.meaning, self.base_path)
