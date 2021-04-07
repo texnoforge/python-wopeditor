@@ -41,9 +41,13 @@ Builder.load_string('''
                 FloatLayout:
                     #Filler
 
-            StackLayout:
-                id: symbols_list
-                spacing: 5
+            NiceScrollView:
+                id: main_scroll
+                StackLayout:
+                    id: symbols_list
+                    size_hint: 1, None
+                    height: max(main_scroll.height, self.minimum_height)
+                    spacing: 10
 
 
 <SymbolButton>:
