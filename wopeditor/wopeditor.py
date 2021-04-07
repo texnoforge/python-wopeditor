@@ -239,6 +239,12 @@ class WoPEditorApp(App):
         self.symbol.model.save()
         self.get_screen('symbol').update_model()
 
+    def delete_drawing(self):
+        Logger.warning("drawing: DELETE drawing: %s", self.drawing)
+        self.drawing.delete()
+        self.symbol.load_drawings()
+        self.get_screen('symbol').update_symbol()
+        self.goto_symbol(back_from='drawing')
 
 def run_app():
     trio.run(WoPEditorApp().app_start)

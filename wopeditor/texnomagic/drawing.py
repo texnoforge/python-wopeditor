@@ -113,6 +113,11 @@ class TexnoMagicDrawing:
             scurves.append(scurve)
         return scurves
 
+    def delete(self):
+        if not self.path or not self.path.exists():
+            return
+        self.path.unlink()
+
     def __repr__(self):
         return '<TexnoMagicDrawing @ %s: %d points in %d curves>' % (
             self.path, len(self._points), len(self._curves))
