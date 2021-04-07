@@ -11,8 +11,8 @@ Choose a [release][releases], select **Assets**, download `wopeditor-*_installer
 
 #### Recommended Windows Download
 
-* [wopeditor-0.0.1_installer.exe](https://github.com/texnoforge/wopeditor/releases/download/v0.0.1/wopeditor-0.0.1_installer.exe)
-  ([v0.0.1 release][v0.0.1])
+* [wopeditor-0.0.2_installer.exe](https://github.com/texnoforge/wopeditor/releases/download/v0.0.2/wopeditor-0.0.2_installer.exe)
+  ([v0.0.2 release][v0.0.2])
 
 ### Other Systems
 
@@ -114,7 +114,7 @@ wopeditor
 
 
 [releases]: https://github.com/texnoforge/wopeditor/releases
-[v0.0.1]: https://github.com/texnoforge/wopeditor/releases/tag/v0.0.1
+[v0.0.2]: https://github.com/texnoforge/wopeditor/releases/tag/v0.0.2
 
 
 ### Tested Operating Systems

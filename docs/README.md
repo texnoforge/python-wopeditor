@@ -12,9 +12,9 @@ Read more in [intro](intro.md).
 
 ## Status
 
-### first pre-alpha release v0.0.1 is here 🎉
+### wopeditor is available in public pre-alpha 🎉
 
-You can use [wopeditor v0.0.1][v0.0.1] to:
+You can use [wopeditor-0.0.2][v0.0.2] to:
 
 * create and save new magic symbols and alphabets
 * draw multiple drawings of a symbol using mouse or other pointing device
@@ -55,5 +55,5 @@ Feel free to drop by
 [#wopeditor @ texnoforge discord](https://discord.gg/Dq3vaeg3pG).
 
 
-[v0.0.1]: https://github.com/texnoforge/wopeditor/releases/tag/v0.0.1
+[v0.0.2]: https://github.com/texnoforge/wopeditor/releases/tag/v0.0.2
 [wop.mod.io]: https://wop.mod.io
