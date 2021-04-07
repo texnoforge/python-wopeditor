@@ -4,12 +4,11 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    
         {
-            "name": "wopeditor.py",
+            "name": "wopeditor",
             "type": "python",
             "request": "launch",
-            "program": "wopeditor.py",
+            "module": "wopeditor",
             "console": "integratedTerminal"
         }
     ],
