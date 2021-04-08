@@ -29,6 +29,7 @@ from wopeditor import wopmods
 from wopeditor.screens.abcs import AbcsScreen
 from wopeditor.screens.abc import AbcScreen
 from wopeditor.screens.symbol import SymbolScreen
+from wopeditor.screens.model import ModelScreen
 from wopeditor.screens.drawing import DrawingScreen
 from wopeditor.screens.newdrawing import NewDrawingScreen
 
@@ -52,6 +53,7 @@ SCREENS = {
     'abcs': AbcsScreen,
     'abc': AbcScreen,
     'symbol': SymbolScreen,
+    'model': ModelScreen,
     'drawing': DrawingScreen,
     'newdrawing': NewDrawingScreen,
 }
@@ -168,7 +170,7 @@ class WoPEditorApp(App):
         if symbol:
             self.symbol = symbol
             screen.update_symbol(symbol)
-        elif back_from == 'newdrawing':
+        elif back_from in ['newdrawing', 'model']:
             screen.update_symbol()
         self.goto_screen(screen, back=back_from)
 
@@ -177,6 +179,11 @@ class WoPEditorApp(App):
         if drawing:
             self.drawing = drawing
             screen.update_drawing(drawing)
+        self.goto_screen(screen, back=back_from)
+
+    def goto_model(self, back_from=None):
+        screen = self.get_screen('model')
+        screen.update_model(self.symbol)
         self.goto_screen(screen, back=back_from)
 
     def goto_new_drawing(self):
@@ -232,12 +239,11 @@ class WoPEditorApp(App):
         Logger.info("mod: export complete: %s", path)
         platform.open_dir(path, select=True)
 
-    def train_symbol_model(self):
+    def train_model(self):
         Logger.info("model: training symbol model from drawings: %s", self.symbol)
         self.symbol.train_model_from_drawings()
-        Logger.info("model: saving @ %s", self.symbol.model.data_path)
         self.symbol.model.save()
-        self.get_screen('symbol').update_model()
+        self.get_screen('model').update_model()
 
     def delete_drawing(self):
         Logger.warning("drawing: DELETE drawing: %s", self.drawing)

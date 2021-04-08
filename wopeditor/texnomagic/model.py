@@ -10,7 +10,7 @@ import sklearn.utils._weight_vector
 
 class TexnoMagicSymbolModel:
 
-    def __init__(self, path=None, n_gauss=20):
+    def __init__(self, path=None, n_gauss=10):
         self.path = path
         self.n_gauss = n_gauss
         self.gmm = None
@@ -38,6 +38,7 @@ class TexnoMagicSymbolModel:
         if gmm_path.exists():
             try:
                 self.gmm = pickle.load(gmm_path.open('rb'))
+                self.n_gauss = self.gmm.n_components
             except Exception:
                 print("MODEL: load FAIL: %s " % gmm_path)
 

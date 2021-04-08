@@ -1,7 +1,7 @@
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.logger import Logger
-from kivy.graphics import Color, Ellipse, Line, PushMatrix, PopMatrix, Rotate
+from kivy.graphics import Color, Line
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import Screen
@@ -10,6 +10,7 @@ from kivy.uix.image import Image
 from wopeditor import platform
 from wopeditor.texnomagic import common
 from wopeditor.widgets.nicescrollview import NiceScrollView
+from wopeditor.widgets.modelpreview import ModelPreview
 
 import numpy as np
 
@@ -33,13 +34,16 @@ Builder.load_string('''
                     text: "new drawing"
                     on_release: app.goto_new_drawing()
                 SideButton:
-                    text: "open dir"
-                    on_release: root.open_dir()
-                SideButton:
-                    text: "train model"
-                    on_release: app.train_symbol_model()
+                    text: "symbol model"
+                    on_release: app.goto_model()
                 ModelPreview:
                     id: model_preview
+                    height: self.width
+                    size_hint_y: None
+                    on_release: app.goto_model()
+                SideButton:
+                    text: "open dir"
+                    on_release: root.open_dir()
                 FloatLayout:
                     #Filler
 
@@ -55,11 +59,6 @@ Builder.load_string('''
 <DrawingButton>:
     size: [160, 160]
     size_hint: None, None
-
-
-<ModelPreview>:
-    size_hint_y: None
-    height: self.width
 ''')
 
 
@@ -82,10 +81,10 @@ class SymbolScreen(Screen):
         self.update_model()
 
     def update_model(self):
-        self.ids['model_preview'].update_model(model=self.symbol.model)
+        self.ids['model_preview'].update_symbol(symbol=self.symbol)
 
     def open_dir(self):
-        platform.open_dir(self.symbol.info_path, select=True)
+        platform.open_dir(self.symbol.model.path, select=True)
 
 
 class DrawingButton(Button):
@@ -120,47 +119,3 @@ class DrawingButton(Button):
 
     def on_release(self):
         App.get_running_app().goto_drawing(self.drawing)
-
-
-class ModelPreview(Widget):
-    model = None
-
-    def __init__(self, **kwargs):
-        model = kwargs.pop('model', None)
-        super().__init__(**kwargs)
-        if model:
-            self.update_model(model=model)
-        self.bind(size=self.update_model,
-                  pos=self.update_model)
-
-    def update_model(self, *arg, model=None):
-        if model is not None:
-            self.model = model
-
-        self.canvas.clear()
-        if not self.model or not hasattr(self.model.gmm, 'means_'):
-            return
-
-        with self.canvas:
-            Color(0.7, 0.0, 0.0)
-
-            means = self.model.gmm.means_
-            for i, cov in enumerate(self.model.gmm.covariances_):
-                v, w = np.linalg.eigh(cov)
-                u = w[0] / np.linalg.norm(w[0])
-                angle = np.arctan2(u[1], u[0])
-                angle = 180 * angle / np.pi  # convert to degrees
-                v = 2. * np.sqrt(2.) * np.sqrt(v)
-                # ell = mpl.patches.Ellipse(means[i, :2], v[0], v[1],
-                #                     180 + angle, color=color)
-                asize = np.array(self.size)
-                center = means[i, :2] / 1000 * asize + self.pos
-                size = v / 1000 * asize
-                pos = center - (size / 2)
-                PushMatrix()
-                Rotate(origin=center, angle=angle)
-                Ellipse(
-                    pos=pos,
-                    size=size,
-                )
-                PopMatrix()
