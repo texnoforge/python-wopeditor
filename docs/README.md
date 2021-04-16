@@ -14,17 +14,17 @@ Read more in [intro](intro.md).
 
 ### wopeditor is available in public pre-alpha 🎉
 
-You can use [wopeditor-0.0.2][v0.0.2] to:
+You can use [wopeditor-0.0.3][v0.0.3] to:
 
 * create and save new magic symbols and alphabets
-* draw multiple drawings of a symbol using mouse or other pointing device
-* view and download community alphabets as mods from [wop.mod.io]
+* draw multiple drawings of a symbol using mouse or other pointing device - graphic tablets work too
+* train and visualize GMM-based symbol models from all available drawings
+* download and view community alphabets as mods from [wop.mod.io] with one click
 * export alphabets as single .zip file you can upload to [wop.mod.io]
 
-Even though there isn't any recognition functionality yet, `wopeditor` can be
-used to create, modify, store, and share magic symbols in **TexnoMagic** format.
-
 With basic features complete, it's time for [Core Symbols Challenge](core_symbols.md) ⊂(✰‿✰)つ
+
+First recognition-related features are starting to show up.
 
 ### screenshot
 
@@ -55,5 +55,5 @@ Feel free to drop by
 [#wopeditor @ texnoforge discord](https://discord.gg/Dq3vaeg3pG).
 
 
-[v0.0.2]: https://github.com/texnoforge/wopeditor/releases/tag/v0.0.2
+[v0.0.3]: https://github.com/texnoforge/wopeditor/releases/tag/v0.0.3
 [wop.mod.io]: https://wop.mod.io
