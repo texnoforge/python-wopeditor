@@ -41,6 +41,19 @@ class TexnoMagicAlphabet:
             symbol = TexnoMagicSymbol()
             symbol.load(symbol_info_path.parent)
             self._symbols.append(symbol)
+        self.sort_symbols()
+
+    def sort_symbols(self):
+        if not self._symbols:
+            return
+        known = []
+        for core_symbol in common.CORE_SYMBOLS_ORDER:
+            for symbol in self._symbols:
+                if symbol.meaning == core_symbol:
+                    known.append(symbol)
+                    self._symbols.remove(symbol)
+                    break
+        self._symbols = known + self._symbols
 
     def save(self):
         os.makedirs(self.base_path, exist_ok=True)

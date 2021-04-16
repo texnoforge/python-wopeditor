@@ -26,3 +26,38 @@ MODS_DATA_PATH = DATA_PATH / 'mods'
 EXPORT_PATH = DATA_PATH / 'export'
 
 ALPHABETS_DIR = 'alphabets'
+
+CORE_SYMBOLS_ORDER = [
+    # elements
+    'fire',
+    'ice',
+    'lightning',
+    'water',
+    'air',
+    'earth',
+    'life',
+    'death',
+    # shapes
+    'bolt',
+    'ball',
+    'beam',
+    'area',
+    'cone',
+    # targets
+    'self',
+    'friend',
+    'enemy',
+    # selectors
+    'close',
+    'far',
+    'weak',
+    'strong',
+    'random',
+    'all',
+    # modifiers
+    'big',
+    'small',
+    'fast',
+    'slow',
+    'homing',
+]
