@@ -5,9 +5,19 @@ from pathlib import Path
 
 import trio
 
+
+from kivy.config import Config
+# Kivy insists on global config before import
+Config.set('kivy', 'window_icon', 'wopeditor.ico')
+Config.set('graphics', 'width', '1024')
+Config.set('graphics', 'height', '768')
+Config.set('graphics', 'window_state', 'maximized')
+Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
+
+
 from kivy.app import App
 from kivy.app import async_runTouchApp
-from kivy.config import Config
+from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.factory import Factory
 from kivy.lang import Builder
@@ -43,12 +53,6 @@ else:
     APP_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
-Config.set('kivy', 'window_icon', 'wopeditor.ico')
-Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
-Config.set('graphics', 'width', '1024')
-Config.set('graphics', 'height', '768')
-
-
 SCREENS = {
     'abcs': AbcsScreen,
     'abc': AbcScreen,
@@ -67,6 +71,7 @@ class WoPEditorApp(App):
     screens = {}
     nursery = None
     mods = None
+    _keyboard = None
 
     version = __version__
 
@@ -86,7 +91,12 @@ class WoPEditorApp(App):
         self.title = 'Words of Power Editor v%s' % self.version
         self.screens_available = ['abcs']
         self.base_path = Path(APP_PATH)
+        self.setup_keyboard()
         return ScreenManager()
+
+    def setup_keyboard(self):
+        self._keyboard = Window.request_keyboard(self.keypress, self.root)
+        self._keyboard.bind(on_key_down=self.keypress)
 
     def on_start(self):
         Logger.info("wopeditor: base path: %s" % self.base_path)
@@ -99,6 +109,25 @@ class WoPEditorApp(App):
         #self.goto_abc(self.abcs.abcs['user'][0])
         #self.goto_symbol(self.abc.symbols[1])
         #self.goto_drawing(self.symbol.drawings[0])
+
+    def keypress(self, kb=None, keycode=None, text=None, modifiers=None):
+        if not keycode:
+            return False
+        code, name = keycode
+
+        if name == 'f5':
+            self.refresh()
+        if name in ['f', 'f11'] or (name == 'enter' and 'alt' in modifiers):
+            self.toggle_fullscreen()
+
+        return True
+
+    def toggle_fullscreen(self):
+        Logger.info("wopeditor: toggling fullscreen mode")
+        if Window.fullscreen == 'auto':
+            Window.fullscreen = False
+        else:
+            Window.fullscreen = 'auto'
 
     async def load_community_mods(self):
         Logger.info("wopeditor: loading community mods in the background")
@@ -151,6 +180,7 @@ class WoPEditorApp(App):
     def refresh(self, *args):
         self.reload_abcs()
         self.nursery.start_soon(self.load_community_mods)
+        self.goto_abcs(back_from='refresh')
 
     def goto_abcs(self, back_from=None):
         screen = self.get_screen('abcs')

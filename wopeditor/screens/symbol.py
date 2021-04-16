@@ -84,7 +84,7 @@ class SymbolScreen(Screen):
         self.ids['model_preview'].update_symbol(symbol=self.symbol)
 
     def open_dir(self):
-        platform.open_dir(self.symbol.model.path, select=True)
+        platform.open_dir(self.symbol.info_path, select=True)
 
 
 class DrawingButton(Button):
