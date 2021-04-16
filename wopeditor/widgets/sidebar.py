@@ -9,7 +9,7 @@ Builder.load_string('''
     padding: 0, 0, 30, 0
     size_hint_x: None
     width: dp(200)
-    spacing: 5
+    spacing: dp(10)
 
 <SideButton>:
     size_hint: None, None

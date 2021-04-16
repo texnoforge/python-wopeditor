@@ -54,8 +54,8 @@ Builder.load_string('''
 
 <AbcButton>:
     size_hint: None, None
-    size: [self.texture_size[0] + dp(40), dp(72)]
-    font_size: dp(36)
+    size: [self.texture_size[0] + dp(60), dp(100)]
+    font_size: dp(42)
     on_press: app.goto_abc(self.abc)
 
 
@@ -112,16 +112,16 @@ Builder.load_string('''
 
 
 <AbcsLabel@Label>:
-    font_size: dp(24)
+    font_size: dp(32)
     size_hint: None, None
     size: self.texture_size
 
 
 <AbcsLayout@StackLayout>:
-    spacing: 5
+    spacing: dp(20)
     size_hint_y: None
     height: self.minimum_height
-    padding: [0, 5]
+    padding: [0, dp(20)]
 ''')
 
 
@@ -147,6 +147,7 @@ class AbcsScreen(Screen):
         for tag, abcs in self.abcs.abcs.items():
             if not abcs:
                 continue
+            text = tag
             abcs_label = Factory.AbcsLabel(text=tag)
             abcs_lists.add_widget(abcs_label)
 
@@ -157,7 +158,7 @@ class AbcsScreen(Screen):
             abcs_lists.add_widget(abcs_list)
 
         if self.mods:
-            mods_label = Factory.AbcsLabel(text="online community mods")
+            mods_label = Factory.AbcsLabel(text="online community mods (press to download)")
             abcs_lists.add_widget(mods_label)
 
             mods_list = Factory.AbcsLayout()
