@@ -9,8 +9,8 @@ import trio
 from kivy.config import Config
 # Kivy insists on global config before import
 Config.set('kivy', 'window_icon', 'wopeditor.ico')
-Config.set('graphics', 'width', '1024')
-Config.set('graphics', 'height', '768')
+Config.set('graphics', 'width', '1100')
+Config.set('graphics', 'height', '800')
 Config.set('graphics', 'window_state', 'maximized')
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 

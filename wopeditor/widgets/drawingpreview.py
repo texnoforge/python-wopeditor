@@ -23,6 +23,6 @@ class DrawingPreview(Widget):
             return
         self.canvas.clear()
         with self.canvas:
-            Color(0.7, 0.7, 0.0)
+            Color(1, 1, 1)
             for curve in self.drawing.curves_fit_area(self.pos, self.size):
                 Line(points=curve.tolist())

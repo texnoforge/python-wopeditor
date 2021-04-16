@@ -67,7 +67,7 @@ class ModelPreview(Button):
                     PopMatrix()
 
             # draw all symbol drawings
-            Color(0.7, 0.7, 0.0, 0.2)
+            Color(1, 1, 1, 0.2)
             for drawing in self.symbol.drawings:
                 for curve in drawing.curves_fit_area(ipos, isize):
                     Line(points=curve.tolist())

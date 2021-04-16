@@ -1,7 +1,8 @@
 from kivy.app import App
+from kivy.core.text import Label as CoreLabel
 from kivy.lang import Builder
 from kivy.logger import Logger
-from kivy.graphics import Color, Line
+from kivy.graphics import Color, Line, Rectangle
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import Screen
@@ -57,8 +58,11 @@ Builder.load_string('''
 
 
 <DrawingButton>:
-    size: [160, 160]
     size_hint: None, None
+    size: [dp(200), dp(220)]
+    text_size: self.size
+    valign: 'bottom'
+    halign: 'center'
 ''')
 
 
@@ -101,21 +105,36 @@ class DrawingButton(Button):
     def update_drawing(self, *_, drawing=None):
         if drawing:
             self.drawing = drawing
-        if not self.drawing:
-            return
-
         padding_r = 0.1
+        lw = 2
         size = list(map(lambda x: x * (1 - 2 * padding_r), self.size))
         pos = [self.pos[0] + size[0] * padding_r, self.pos[1] + size[1] * padding_r]
 
         if not self.text:
             self.text = self.drawing.name
-        self.canvas.after.clear()
-        #self.canvas.clear()
-        with self.canvas.after:
-            Color(0.7, 0.7, 0.0)
-            for curve in self.drawing.curves_fit_area(pos, size):
-                Line(points=curve.tolist())
+        self.canvas.clear()
+
+        with self.canvas:
+            # label
+            label = CoreLabel(text=self.text, font_size=20)
+            label.refresh()
+            ltex = label.texture
+            lpos = [self.x + (self.width - ltex.size[0]) / 2, self.y + 5]
+
+            # drawing
+            dpos = [pos[0], pos[1] +  ltex.height]
+            dsize = [size[0], size[1] - ltex.height]
+            if self.drawing:
+                Color(1, 1, 1)
+                for curve in self.drawing.curves_fit_area(dpos, dsize):
+                    Line(points=curve.tolist(), width=lw)
+            else:
+                Color(0.06, 0.06, 0.06)
+                Rectangle(pos=dpos, size=dsize)
+
+            Color(1, 1, 1)
+            self.canvas.add(Rectangle(size=ltex.size, pos=lpos, texture=ltex))
+
 
     def on_press(self):
         App.get_running_app().goto_drawing(self.drawing)
