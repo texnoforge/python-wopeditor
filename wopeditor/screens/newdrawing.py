@@ -25,10 +25,10 @@ Builder.load_string('''
                 id: sidebar
                 SideButton:
                     text: "clear"
-                    on_release: root.ids['drawing_area'].clear()
+                    on_press: root.ids['drawing_area'].clear()
                 SideButton:
                     text: "save"
-                    on_release: app.save_drawing()
+                    on_press: app.save_drawing()
                 FloatLayout:
                     #Filler
 

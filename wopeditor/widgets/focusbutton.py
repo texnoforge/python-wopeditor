@@ -14,6 +14,6 @@ class FocusButton(FocusBehavior, Button):
     def keyboard_on_key_up(self, window, keycode):
         super().keyboard_on_key_up(window, keycode)
         if keycode[1] in ['enter', 'numpadenter']:
-            self.dispatch("on_release")
+            self.dispatch("on_press")
             return True
         return False

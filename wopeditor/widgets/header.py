@@ -37,7 +37,7 @@ Builder.load_string('''
                 text: "< back"
                 size: self.texture_size[0] * 2, self.texture_size[1] * 2
                 size_hint: None, None
-                on_release: root.dispatch('on_press_back')
+                on_press: root.dispatch('on_press_back')
 ''')
 
 

@@ -31,13 +31,13 @@ Builder.load_string('''
                 id: sidebar
                 SideButton:
                     text: "new symbol"
-                    on_release: root.show_create_new_symbol()
+                    on_press: root.show_create_new_symbol()
                 SideButton:
                     text: "open dir"
-                    on_release: root.open_dir()
+                    on_press: root.open_dir()
                 SideButton:
                     text: "export"
-                    on_release: app.export_abc()
+                    on_press: app.export_abc()
                 FloatLayout:
                     #Filler
 
@@ -87,7 +87,7 @@ Builder.load_string('''
             size_hint: 1, None
             font_size: '20sp'
             height: self.texture_size[1] * 2.2
-            on_release: root.confirm()
+            on_press: root.confirm()
 ''')
 
 
@@ -122,7 +122,7 @@ class SymbolButton(DrawingButton):
             kwargs['drawing'] = self.symbol.get_random_drawing()
         super().__init__(**kwargs)
 
-    def on_release(self):
+    def on_press(self):
         App.get_running_app().goto_symbol(self.symbol)
 
 

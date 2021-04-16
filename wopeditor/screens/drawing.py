@@ -24,10 +24,10 @@ Builder.load_string('''
                 id: sidebar
                 SideButton:
                     text: "open dir"
-                    on_release: root.open_dir()
+                    on_press: root.open_dir()
                 SideButton:
                     text: "delete drawing"
-                    on_release: app.delete_drawing()
+                    on_press: app.delete_drawing()
                 FloatLayout:
                     #Filler
 

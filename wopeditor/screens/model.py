@@ -25,10 +25,10 @@ Builder.load_string('''
                 id: sidebar
                 SideButton:
                     text: "open dir"
-                    on_release: root.open_dir()
+                    on_press: root.open_dir()
                 SideButton:
                     text: "train model"
-                    on_release: root.train_model()
+                    on_press: root.train_model()
                 BoxLayout:
                     size_hint_y: None
                     height: dp(30)

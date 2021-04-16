@@ -33,13 +33,13 @@ Builder.load_string('''
                 id: sidebar
                 SideButton:
                     text: "new alphabet"
-                    on_release: root.show_create_new_abc()
+                    on_press: root.show_create_new_abc()
                 SideButton:
                     text: "open dir"
-                    on_release: root.open_dir()
+                    on_press: root.open_dir()
                 SideButton:
                     text: "refresh"
-                    on_release: app.refresh()
+                    on_press: app.refresh()
                 FloatLayout:
                     #Filler
 
@@ -56,13 +56,13 @@ Builder.load_string('''
     size_hint: None, None
     size: [self.texture_size[0] + dp(40), dp(72)]
     font_size: dp(36)
-    on_release: app.goto_abc(self.abc)
+    on_press: app.goto_abc(self.abc)
 
 
 <ModButton>:
     size: [340, 200]
     size_hint: None, None
-    on_release: app.download_mod(self.mod)
+    on_press: app.download_mod(self.mod)
 
     AsyncImage:
         id: bimg
@@ -108,7 +108,7 @@ Builder.load_string('''
             size_hint: 1, None
             font_size: '20sp'
             height: self.texture_size[1] * 2.2
-            on_release: root.confirm()
+            on_press: root.confirm()
 
 
 <AbcsLabel@Label>:

@@ -32,18 +32,18 @@ Builder.load_string('''
                 id: sidebar
                 SideButton:
                     text: "new drawing"
-                    on_release: app.goto_new_drawing()
+                    on_press: app.goto_new_drawing()
                 SideButton:
                     text: "symbol model"
-                    on_release: app.goto_model()
+                    on_press: app.goto_model()
                 ModelPreview:
                     id: model_preview
                     height: self.width
                     size_hint_y: None
-                    on_release: app.goto_model()
+                    on_press: app.goto_model()
                 SideButton:
                     text: "open dir"
-                    on_release: root.open_dir()
+                    on_press: root.open_dir()
                 FloatLayout:
                     #Filler
 
@@ -117,5 +117,5 @@ class DrawingButton(Button):
             for curve in self.drawing.curves_fit_area(pos, size):
                 Line(points=curve.tolist())
 
-    def on_release(self):
+    def on_press(self):
         App.get_running_app().goto_drawing(self.drawing)

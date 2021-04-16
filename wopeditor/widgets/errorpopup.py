@@ -18,7 +18,7 @@ Builder.load_string('''
             text: 'OK'
             size_hint_y: None
             height: dp(50)
-            on_release: root.dismiss()
+            on_press: root.dismiss()
 ''')
 
 
