@@ -1,30 +1,49 @@
 # Installation
 
-## Native Packages
+## Install using pip (recommended)
 
-### Windows
+`wopeditor` is available from [PyPI](https://pypi.org/project/wopeditor/) ᕕ( ᐛ )ᕗ
 
-On Windows you can use installer which is provided with each
+Make sure you have Python 3 and `pip` installed and then simply run
+
+```
+pip install wopeditor
+```
+
+To upgrade to latest version:
+
+```
+pip install --upgrade wopeditor
+```
+
+Once installed, run using
+```
+python -m wopeditor
+```
+
+## Windows Installer
+
+On Windows you can alternatively use installer which is provided with each
 [release][releases].
 
 Choose a [release][releases], select **Assets**, download `wopeditor-*_installer.exe` file and run it.
 
-#### Recommended Windows Download
+You might get false positives from security software because `wopeditor` doesn't have any kind of commercial certification.
+
+Install using `pip` (as described above) instead if you don't want to run the `.exe`.
+
+### Recommended Windows Download
 
 * [wopeditor-0.0.3_installer.exe](https://github.com/texnoforge/wopeditor/releases/download/v0.0.3/wopeditor-0.0.3_installer.exe)
   ([v0.0.3 release][v0.0.3])
 
-### Other Systems
 
-Packages aren't available for other platforms, please use the Source.
-
-
-## Running from Source (easy)
+# Running from Source
 
 You should be ablo to run `wopeditor` from source on many different systems
 supported by Kivy framework including Linux, Windows, Mac, and Android.
 
-### Getting Sources
+## Getting Sources
 
 You can get latest sources using `git`:
 
@@ -37,9 +56,9 @@ Or you can download [release](https://github.com/texnoforge/wopeditor/releases)
 archive and unpack it somewhere.
 
 
-### Requirements
+## Requirements
 
-#### Python 3
+### Python 3
 
 `wopeditor` is written **Python 3.9**, lower versions might or might not work (3.7+ is worth a try).
 
@@ -60,7 +79,7 @@ Fedora, CentOS, SUSE and other `.rpm` distros:
 sudo dnf install python3 python3-pip
 ```
 
-#### Required Python Modules
+### Required Python Modules
 
 Required modules are listed in `requirements.txt` file and are all
 available from PyPI to be installed using `pip`.
@@ -68,15 +87,18 @@ available from PyPI to be installed using `pip`.
 They should be automatically installed during `wopeditor` installation, no need
 to install them manually.
 
-A short summary of used modules:
+A short summary of used python modules:
 
-* [Kivy](https://kivy.org/doc/stable/gettingstarted/installation.html)
-  python UI framework - you **need version 2.0.0 or newer**
+* [Kivy](https://kivy.org/doc/stable/gettingstarted/installation.html):
+  UI framework - you **need version 2.0.0 or newer**
 
-* [Trio](https://trio.readthedocs.io/en/stable/) python async module
+* [scikit-learn](https://scikit-learn.org/):
+  all the science is provided by this epic library
+
+* [Trio](https://trio.readthedocs.io/en/stable/): python async module
 
 
-### Install wopeditor Module
+## Install wopeditor Module
 
 Run following in top level of `wopeditor` source dir:
 
@@ -97,7 +119,7 @@ python setup.py develop
 ```
 
 
-### Starting wopeditor
+## Starting wopeditor
 
 After you've installed `wopeditor` module, you can run it from anywhere:
 
@@ -117,7 +139,7 @@ wopeditor
 [v0.0.3]: https://github.com/texnoforge/wopeditor/releases/tag/v0.0.3
 
 
-### Tested Operating Systems
+# Tested Operating Systems
 
 `wopeditor` has been tested to work on following systems:
 
