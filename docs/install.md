@@ -34,8 +34,8 @@ Install using `pip` (as described above) instead if you don't want to run the `.
 
 ### Recommended Windows Download
 
-* [wopeditor-0.0.3_installer.exe](https://github.com/texnoforge/wopeditor/releases/download/v0.0.3/wopeditor-0.0.3_installer.exe)
-  ([v0.0.3 release][v0.0.3])
+* [wopeditor-0.1.0_installer.exe](https://github.com/texnoforge/wopeditor/releases/download/v0.1.0/wopeditor-0.1.0_installer.exe)
+  ([v0.1.0 release][v0.1.0])
 
 
 # Running from Source
@@ -136,7 +136,7 @@ wopeditor
 
 
 [releases]: https://github.com/texnoforge/wopeditor/releases
-[v0.0.3]: https://github.com/texnoforge/wopeditor/releases/tag/v0.0.3
+[v0.1.0]: https://github.com/texnoforge/wopeditor/releases/tag/v0.1.0
 
 
 # Tested Operating Systems

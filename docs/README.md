@@ -14,7 +14,7 @@ Read more in [intro](intro.md).
 
 ### wopeditor is available in public pre-alpha 🎉
 
-You can use [wopeditor-0.0.3][v0.0.3] to:
+You can use [wopeditor-0.1.0][v0.1.0] to:
 
 * create and save new magic symbols and alphabets
 * draw multiple drawings of a symbol using mouse or other pointing device - graphic tablets work too
@@ -55,5 +55,5 @@ Feel free to drop by
 [#wopeditor @ texnoforge discord](https://discord.gg/Dq3vaeg3pG).
 
 
-[v0.0.3]: https://github.com/texnoforge/wopeditor/releases/tag/v0.0.3
+[v0.1.0]: https://github.com/texnoforge/wopeditor/releases/tag/v0.1.0
 [wop.mod.io]: https://wop.mod.io

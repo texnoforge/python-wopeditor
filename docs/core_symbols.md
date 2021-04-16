@@ -27,7 +27,7 @@ Finally, symbols need to be distinct. No two symbols should be similar.
 
 ## Use wopeditor, paper, strings or whatever else you want
 
-I've [released Words of Power Editor v0.0.3][v0.0.3] which you can use to draw
+I've [released Words of Power Editor v0.1.0][v0.1.0] which you can use to draw
 symbols using mouse (and other pointing devices) in **TexnoMagic** format
 which allows easy sharing of entire magic alphabet as a single zip fil and you
 can even upload your alphabet to [wop.mod.io](https://wop.mod.io) where
@@ -105,4 +105,4 @@ Thanks a lot, I hope you have a creative time with symbols and concepts!
 
 [magic]: https://texnoforge.dev/words-of-power-devlog-1-theory-of-magic.html
 [discord]: https://discord.gg/Dq3vaeg3pG
-[v0.0.3]: https://github.com/texnoforge/wopeditor/releases/tag/v0.0.3
+[v0.1.0]: https://github.com/texnoforge/wopeditor/releases/tag/v0.1.0
