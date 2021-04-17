@@ -11,7 +11,7 @@ from kivy.config import Config
 Config.set('kivy', 'window_icon', 'wopeditor.ico')
 Config.set('graphics', 'width', '1100')
 Config.set('graphics', 'height', '800')
-Config.set('graphics', 'window_state', 'maximized')
+# Config.set('graphics', 'window_state', 'maximized')
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
 
@@ -42,6 +42,8 @@ from wopeditor.screens.symbol import SymbolScreen
 from wopeditor.screens.model import ModelScreen
 from wopeditor.screens.drawing import DrawingScreen
 from wopeditor.screens.newdrawing import NewDrawingScreen
+from wopeditor.screens.testabc import TestAbcScreen
+from wopeditor.screens.calibrate import CalibrateScreen
 
 from wopeditor.widgets.errorpopup import ErrorPopup
 
@@ -60,6 +62,8 @@ SCREENS = {
     'model': ModelScreen,
     'drawing': DrawingScreen,
     'newdrawing': NewDrawingScreen,
+    'testabc': TestAbcScreen,
+    'calibrate': CalibrateScreen,
 }
 
 
@@ -221,6 +225,20 @@ class WoPEditorApp(App):
         screen.update()
         self.goto_screen(screen)
 
+    def goto_test_abc(self, abc=None, back_from=None):
+        screen = self.get_screen('testabc')
+        if abc:
+            self.abc = abc
+        screen.update(self.abc)
+        self.goto_screen(screen, back=back_from)
+
+    def goto_calibrate(self, abc=None, back_from=None):
+        screen = self.get_screen('calibrate')
+        if abc:
+            self.abc = abc
+        screen.update(self.abc)
+        self.goto_screen(screen, back=back_from)
+
     def new_symbol(self):
         popup = Factory.NewSymbolPopup()
 
@@ -281,6 +299,14 @@ class WoPEditorApp(App):
         self.symbol.load_drawings()
         self.get_screen('symbol').update_symbol()
         self.goto_symbol(back_from='drawing')
+
+    def recognize_symbol(self, curves):
+        if not curves:
+            return
+        drawing = TexnoMagicDrawing(curves=curves)
+        drawing.normalize()
+        symbol, score = self.abc.recognize(drawing)
+        Logger.warning("abc: BEST MATCH: %s @ %s", symbol.name, score)
 
 def run_app():
     trio.run(WoPEditorApp().app_start)

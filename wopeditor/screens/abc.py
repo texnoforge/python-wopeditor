@@ -33,6 +33,12 @@ Builder.load_string('''
                     text: "new symbol"
                     on_press: root.show_create_new_symbol()
                 SideButton:
+                    text: "calibrate"
+                    on_press: app.goto_calibrate()
+                SideButton:
+                    text: "test"
+                    on_press: app.goto_test_abc()
+                SideButton:
                     text: "open dir"
                     on_press: root.open_dir()
                 SideButton:

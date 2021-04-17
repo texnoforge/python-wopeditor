@@ -8,8 +8,8 @@ from wopeditor.widgets.drawingarea import DrawingArea
 
 
 Builder.load_string('''
-<NewDrawingScreen>:
-    name: "newdrawing"
+<TestAbcScreen>:
+    name: "testabc"
 
     GridLayout:
         cols: 1
@@ -17,8 +17,8 @@ Builder.load_string('''
 
         Header:
             id: header
-            title: "new symbol drawing"
-            on_press_back: app.goto_symbol(back_from=root.name)
+            title: "test alphabet recognition"
+            on_press_back: app.goto_abc(back_from=root.name)
 
         BoxLayout:
             Sidebar:
@@ -26,17 +26,23 @@ Builder.load_string('''
                 SideButton:
                     text: "clear"
                     on_press: root.ids['drawing_area'].clear()
-                SideButton:
-                    text: "save"
-                    on_press: app.save_drawing()
                 FloatLayout:
                     #Filler
 
             DrawingArea:
                 id: drawing_area
+                on_touch_up: app.recognize_symbol(self.curves)
 ''')
 
 
-class NewDrawingScreen(Screen):
-    def update(self):
+class TestAbcScreen(Screen):
+    abc = None
+
+    def update(self, abc=None):
+        if abc:
+            self.abc = abc
+        name = 'alphabet'
+        if self.abc:
+            name = abc.name
+        self.ids['header'].title = "test %s recognition" % name
         self.ids['drawing_area'].clear()

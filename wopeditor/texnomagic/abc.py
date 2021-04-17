@@ -3,6 +3,8 @@ import os
 from pathlib import Path
 import shutil
 
+import numpy as np
+
 from wopeditor.texnomagic import common
 from wopeditor.texnomagic.symbol import TexnoMagicSymbol
 
@@ -87,8 +89,48 @@ class TexnoMagicAlphabet:
             base_dir=self.base_path.name,
         )
 
+    def calibrate(self):
+        """
+        calibrate symbol models in this alphabet
+        """
+        for symbol in self.symbols:
+            if not symbol.model:
+                if symbol.train_model_from_drawings():
+                    symbol.save()
+                print("trained missing model for %s", symbol.name)
+            if not symbol.model:
+                print("skipping missing model for %s", symbol.name)
+                continue
+
+            print("calibrating %s symbol model", symbol.name)
+            for test_symbol in self.symbols:
+                if symbol == test_symbol:
+                    continue
+                if not test_symbol.drawings:
+                    continue
+
+
+
+    def recognize(self, drawing):
+        best_symbol = None
+        best_score = -999999999999999
+        if len(drawing.points) < 1:
+            return None, best_score
+
+        for symbol in self.symbols:
+            score = symbol.model.score(drawing)
+            # DEBUG - remove
+            print("  %s: %s" % (symbol.name, score))
+            if score > best_score:
+                best_score = score
+                best_symbol = symbol
+        return best_symbol, best_score
+
     @property
     def symbols(self):
         if self._symbols is None:
             self.load_symbols()
         return self._symbols
+
+    def __repr__(self):
+        return "<TexnoMagicAlphabet: %s: %s symbols>" % (self.name, len(self.symbols))

@@ -46,5 +46,10 @@ class TexnoMagicSymbolModel:
         self.path.mkdir(parents=True, exist_ok=True)
         pickle.dump(self.gmm, self.data_path.open('wb'))
 
+    def score(self, drawing):
+        if not self.gmm:
+            return -999999999
+        return self.gmm.score(drawing.points)
+
     def __repr__(self):
         return '<TexnoMagicSymbolModel @ %s>' % self.path

@@ -97,7 +97,10 @@ class TexnoMagicSymbol:
 
     def train_model_from_drawings(self):
         data = self.get_all_drawing_points()
+        if not data:
+            return False
         self.model.train(data)
+        return True
 
     def __repr__(self):
         return '<TexnoMagicSymbol %s (%s) @ %s>' % (self.name, self.meaning, self.base_path)
