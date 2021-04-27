@@ -1,3 +1,4 @@
-kivy
-scikit-learn
-trio
+kivy          # wopeditor UI
+parsimonious  # TexnoMagic (lang)
+scikit-learn  # TexnoMagic (model)
+trio          # wopeditor async
