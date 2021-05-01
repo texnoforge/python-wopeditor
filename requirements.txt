@@ -1,4 +1,3 @@
-kivy          # wopeditor UI
-parsimonious  # TexnoMagic (lang)
-scikit-learn  # TexnoMagic (model)
-trio          # wopeditor async
+kivy  # UI framework
+trio  # better asyncio
+git+https://github.com/texnoforge/texnomagic  # TexnoMagic module

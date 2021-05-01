@@ -9,8 +9,8 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.popup import Popup
 
 from wopeditor import platform
-from wopeditor.texnomagic import common
-from wopeditor.texnomagic.abc import TexnoMagicAlphabet
+from texnomagic import common
+from texnomagic.abc import TexnoMagicAlphabet
 
 from wopeditor.widgets.header import Header
 from wopeditor.widgets.nicescrollview import NiceScrollView

@@ -3,7 +3,7 @@ import json
 import sys
 
 
-from wopeditor.texnomagic import lang
+from texnomagic import lang
 
 
 def woplang(*cargs):

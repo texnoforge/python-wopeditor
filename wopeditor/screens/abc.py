@@ -4,8 +4,8 @@ from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen
 from kivy.uix.popup import Popup
 
-from wopeditor.texnomagic.symbol import TexnoMagicSymbol
-from wopeditor.texnomagic import common
+from texnomagic.symbol import TexnoMagicSymbol
+from texnomagic import common
 
 from wopeditor import platform
 from wopeditor.widgets.labeledtextinput import LabeledTextInput

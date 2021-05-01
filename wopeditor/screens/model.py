@@ -4,7 +4,7 @@ from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen
 
 from wopeditor import platform
-from wopeditor.texnomagic import common
+from texnomagic import common
 from wopeditor.widgets.drawingpreview import DrawingPreview
 
 

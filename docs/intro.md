@@ -26,7 +26,7 @@ language based on symbols. You can read my posts about
 [Invocation of Magic](https://texnoforge.dev/words-of-power-devlog-2-invocation-of-magic.html)
 to get better idea of what I'm trying to achieve.
 
-`wopeditor.texnomagic` module is dedicated to technical side of things and I
+`texnomagic` module is dedicated to technical side of things and I
 plan to make it a dedicated module available from PyPI once it matures but
 for now it's more convenient to have everything in one repository.
 
@@ -55,7 +55,7 @@ and/or used as a reference.
 
 * code is split into small files arranged in a sustainable modular structure including UI
 * clean reusable UI code for loading and displaying alphabets/symbols/drawings from disk
-* separate `wopeditor.texnomagic` module to easily interface and work with
+* separate `texnomagic` module to easily interface and work with
   symbol/alphabet data on disk - logic separate from UI
 * `wopeditor` module can be imported locally but it's also ready be packaged using
   `setuptools` for PyPI, using `PyInstaller` for Windows, and using native

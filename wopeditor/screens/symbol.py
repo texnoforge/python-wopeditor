@@ -9,7 +9,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.image import Image
 
 from wopeditor import platform
-from wopeditor.texnomagic import common
+from texnomagic import common
 from wopeditor.widgets.nicescrollview import NiceScrollView
 from wopeditor.widgets.modelpreview import ModelPreview
 

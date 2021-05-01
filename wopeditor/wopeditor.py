@@ -30,9 +30,9 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 
 from wopeditor import __version__
 from wopeditor import platform
-from wopeditor.texnomagic.abcs import TexnoMagicAlphabets
-from wopeditor.texnomagic.drawing import TexnoMagicDrawing
-from wopeditor.texnomagic import common
+from texnomagic.abcs import TexnoMagicAlphabets
+from texnomagic.drawing import TexnoMagicDrawing
+from texnomagic import common
 
 from wopeditor import wopmods
 

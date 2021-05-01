@@ -6,7 +6,7 @@ import re
 import requests
 import zipfile
 
-from wopeditor.texnomagic import common
+from texnomagic import common
 
 
 MODIO_API_KEY = "2071808b470b7abc78fc289e5d3396d1"
