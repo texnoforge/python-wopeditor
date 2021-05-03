@@ -125,7 +125,7 @@ class SymbolButton(DrawingButton):
         self.symbol = kwargs.pop('symbol', None)
         if self.symbol:
             kwargs['text'] = self.symbol.name
-            kwargs['drawing'] = self.symbol.get_random_drawing()
+            kwargs['drawing'] = self.symbol.random_drawing()
         super().__init__(**kwargs)
 
     def on_press(self):

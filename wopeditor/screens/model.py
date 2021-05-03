@@ -69,9 +69,6 @@ class ModelScreen(Screen):
         platform.open_dir(self.symbol.model.path, select=True)
 
     def train_model(self):
-        try:
-            n_gauss = int(self.ids['n_gauss'].text)
-            self.symbol.model.n_gauss = n_gauss
-        except Exception:
-            raise
+        n_gauss = int(self.ids['n_gauss'].text)
+        self.symbol.model.n_gauss = n_gauss
         App.get_running_app().train_model()

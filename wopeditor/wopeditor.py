@@ -289,7 +289,7 @@ class WoPEditorApp(App):
 
     def train_model(self):
         Logger.info("model: training symbol model from drawings: %s", self.symbol)
-        self.symbol.train_model_from_drawings()
+        self.symbol.train_model()
         self.symbol.model.save()
         self.get_screen('model').update_model()
 
