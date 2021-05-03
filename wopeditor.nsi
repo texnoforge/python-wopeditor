@@ -2,7 +2,7 @@
 !define REGPATH_UNINSTSUBKEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}"
 !define SHORTNAME "wopeditor"
 ; TODO: parse from wopeditor module
-!define VERSION "0.1.0"
+!define VERSION "0.2.0"
 Name "${NAME}"
 OutFile "dist\${SHORTNAME}-${VERSION}_installer.exe"
 Unicode True
