@@ -40,7 +40,7 @@ Install using `pip` (as described above) instead if you don't want to run the `.
 
 # Running from Source
 
-You should be ablo to run `wopeditor` from source on many different systems
+You should be able to run `wopeditor` from source on many different systems
 supported by Kivy framework including Linux and Windows.
 
 ## Getting Sources
@@ -133,7 +133,7 @@ wopeditor
 
 
 [releases]: https://github.com/texnoforge/python-wopeditor/releases
-[v0.1.1]: https://github.com/texnoforge/pythonwopeditor/releases/tag/v0.1.1
+[v0.1.1]: https://github.com/texnoforge/python-wopeditor/releases/tag/v0.1.1
 
 
 # Tested Operating Systems
