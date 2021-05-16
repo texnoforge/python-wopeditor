@@ -1,6 +1,4 @@
-# [python-wopeditor docs online][docs]
-
-## [python-wopeditor docs on GitLab](https://github.com/texnoforge/python-wopeditor/tree/master/docs)
+# [python-wopeditor docs on GitHub][docs]
 
 ## wopeditor docs offline
 
@@ -17,4 +15,4 @@ You can also render docs into HTML using mkdocs:
 ![Words of Power Editor screenshot](docs/img/words_of_power_teaser.png)
 
 
-[docs]: http://texnoforge.github.io/python-wopeditor
+[docs]: https://github.com/texnoforge/python-wopeditor/tree/master/docs
