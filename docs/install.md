@@ -2,7 +2,7 @@
 
 ## Install using pip (recommended)
 
-`wopeditor` is available from [PyPI](https://pypi.org/project/wopeditor/) ᕕ( ᐛ )ᕗ
+`python-wopeditor` is available from [PyPI](https://pypi.org/project/wopeditor/) ᕕ( ᐛ )ᕗ
 
 Make sure you have Python 3 and `pip` installed and then simply run
 
@@ -34,14 +34,14 @@ Install using `pip` (as described above) instead if you don't want to run the `.
 
 ### Recommended Windows Download
 
-* [wopeditor-0.1.0_installer.exe](https://github.com/texnoforge/wopeditor/releases/download/v0.1.0/wopeditor-0.1.0_installer.exe)
-  ([v0.1.0 release][v0.1.0])
+* [wopeditor-0.1.1_installer.exe](https://github.com/texnoforge/python-wopeditor/releases/download/v0.1.1/wopeditor-0.1.1_installer.exe)
+  ([v0.1.1 release][v0.1.1])
 
 
 # Running from Source
 
 You should be ablo to run `wopeditor` from source on many different systems
-supported by Kivy framework including Linux, Windows, Mac, and Android.
+supported by Kivy framework including Linux and Windows.
 
 ## Getting Sources
 
@@ -92,9 +92,6 @@ A short summary of used python modules:
 * [Kivy](https://kivy.org/doc/stable/gettingstarted/installation.html):
   UI framework - you **need version 2.0.0 or newer**
 
-* [scikit-learn](https://scikit-learn.org/):
-  all the science is provided by this epic library
-
 * [Trio](https://trio.readthedocs.io/en/stable/): python async module
 
 
@@ -135,19 +132,13 @@ wopeditor
 ```
 
 
-[releases]: https://github.com/texnoforge/wopeditor/releases
-[v0.1.0]: https://github.com/texnoforge/wopeditor/releases/tag/v0.1.0
+[releases]: https://github.com/texnoforge/python-wopeditor/releases
+[v0.1.1]: https://github.com/texnoforge/pythonwopeditor/releases/tag/v0.1.1
 
 
 # Tested Operating Systems
 
-`wopeditor` has been tested to work on following systems:
+`python-wopeditor` has been tested to work on following systems:
 
 * Windows 10
 * Arch Linux
-
-If you managed to run `wopeditor` on other OS, please add it to this list.
-
-You can edit this doc at `docs/install.md` and submit a MR or just open [New Issue] with your success and I'll add it to the list - thank you ❤
-
-[New Issue]: https://github.com/texnoforge/wopeditor/issues
