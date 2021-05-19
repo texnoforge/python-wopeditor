@@ -1,9 +1,17 @@
-site_name: Words of Power Editor
-theme: readthedocs
+site_name: (old) Words of Power Editor
+repo_url: https://github.com/texnoforge/python-wopeditor/
+edit_uri: ""
 nav:
-  - README.md
+  - Overview: README.md
   - install.md
 markdown_extensions:
   - admonition
   - toc:
       permalink: True
+theme:
+  name: material
+  logo: img/x.png
+  palette:
+    scheme: slate
+    primary: black
+    accent: cyan
